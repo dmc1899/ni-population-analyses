@@ -2,6 +2,7 @@ from collections import namedtuple
 import altair as alt
 import math
 import pandas as pd
+import streamlit
 import streamlit as st
 import plotly.graph_objects as go
 import plotly.io as pio
@@ -16,10 +17,17 @@ st. set_page_config(layout='wide')
 
 analysis_end_week = 9
 
+
 @st.cache_data
 def load_data():
     dataframe = pd.read_pickle('data/AllDeathsUpTo2023Week9.pkl')
     return dataframe
+
+
+@st.cache_data
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv().encode('utf-8')
 
 
 def get_column_value(df, week, column):
@@ -39,7 +47,7 @@ def is_higher_or_lower(value):
 def calculate_percentage_change(first_value, second_value):
     real_difference = (second_value - first_value)
 
-    if first_value !=0:
+    if first_value != 0:
         percentage = math.floor((real_difference / first_value) * 100)
     else:
         percentage = 0
@@ -47,6 +55,8 @@ def calculate_percentage_change(first_value, second_value):
 
 
 all_weekly_deaths_df = load_data()
+
+csv = convert_df(all_weekly_deaths_df)
 
 five_year_average_2015_to_2019 = '2015 - 2019'
 five_year_average_2016_to_2020 = '2016 - 2020'
@@ -56,8 +66,11 @@ five_year_average_2016_to_2019_and_2021 = '2016 - 2019 and 2021'
 mean_value_selected='2015_to_2019_Mean'
 
 with st.sidebar:
+
+    analysis_end_week = st.number_input('Select 2023 registration week:', min_value=1, max_value=9, step=1, value=9, help='The week in the current year up to which points are plotted.')
+
     average = st.radio(
-        "Select five-year average:",
+        "Select five-year average to compare against:",
         (five_year_average_2015_to_2019, five_year_average_2016_to_2020, five_year_average_2017_to_2021, five_year_average_2016_to_2019_and_2021))
 
     if average == five_year_average_2015_to_2019:
@@ -69,38 +82,52 @@ with st.sidebar:
     elif average == five_year_average_2016_to_2019_and_2021:
         mean_value_selected='2016_to_2019_and_2021_Mean'
 
-    analysis_end_week = st.number_input('Select registration week:', min_value=1, max_value=9, step=1, value=9, help='The week in the current year up to which points are plotted.')
-    #st.number_input(label, min_value=None, max_value=None, value=, step=None, format=None, key=None, help=None, on_change=None, args=None, kwargs=None, *, disabled=False, label_visibility="visible")
+    show_raw_data = st.checkbox('Show raw data', value= False)
 
+    st.download_button(
+        label="Download as CSV",
+        data=csv,
+        file_name='all_weekly_deaths.csv',
+        mime='text/csv',
+    )
 
-# # Define a list of years to compare against
-# comparison_years = ['2022', '2021', '2020', mean_value_selected]
-# this_week_2023 = get_column_value(all_weekly_deaths_df, analysis_end_week, '2023')
+# Define a list of years to compare against
+comparison_years = ['2022', '2021', '2020', mean_value_selected]
+this_week_2023 = get_column_value(all_weekly_deaths_df, analysis_end_week, '2023')
+
+# Initialize a dictionary to store the results
+results = {}
+
+# Loop through each year and calculate the percentage change compared to this_week_2023
+for year in comparison_years:
+    weekly_deaths = get_column_value(all_weekly_deaths_df, analysis_end_week, year)
+    percentage_change = calculate_percentage_change(weekly_deaths, this_week_2023)
+    results[f'this_week_{year}_vs_2023'] = percentage_change
+
+#streamlit.write(results)
+
+# Store the results in a list of tuples for easier iteration
+result_tuples = [
+    ('2022', results['this_week_2022_vs_2023']),
+    ('2021', results['this_week_2021_vs_2023']),
+    ('2020', results['this_week_2020_vs_2023']),
+    (f'{mean_value_selected}', results[f'this_week_{mean_value_selected}_vs_2023'])
+]
+
+#streamlit.write(result_tuples)
 #
-# # Initialize a dictionary to store the results
-# results = {}
-#
-# # Loop through each year and calculate the percentage change compared to this_week_2023
-# for year in comparison_years:
-#     weekly_deaths = get_column_value(all_weekly_deaths_df, analysis_end_week, year)
-#     percentage_change = calculate_percentage_change(weekly_deaths, this_week_2023)
-#     results[f'this_week_{year}_vs_2023'] = percentage_change
-#
-# # Store the results in a list of tuples for easier iteration
-# result_tuples = [
-#     ('2022', results['this_week_2022_vs_2023']),
-#     ('2021', results['this_week_2021_vs_2023']),
-#     ('2020', results['this_week_2020_vs_2023']),
-#     ('selected_average', results['this_week_2015_to_2019_Mean_vs_2023'])
-# ]
-#
-# print(f'Registration Week {analysis_end_week} in 2023 had {this_week_2023} registered deaths which is:')
-#
-# # Iterate through the results and print them out
-# for year, percentage_change in result_tuples:
-#     percentage_change_abs = abs(percentage_change)
-#     comparison = is_higher_or_lower(percentage_change)
-#     print(f' * {percentage_change_abs}% {comparison} week {analysis_end_week} in {year}')
+
+#st.markdown('Streamlit is **_really_ cool**.')
+#st.markdown(”This text is :red[colored red], and this is **:blue[colored]** and bold.”)
+
+st.markdown(f'Registration Week **{analysis_end_week} in 2023** had **{this_week_2023}** registered deaths which is:')
+
+# Iterate through the results and print them out
+for year, percentage_change in result_tuples:
+    percentage_change_abs = abs(percentage_change)
+    comparison = is_higher_or_lower(percentage_change)
+    colour = 'red' if 'higher' in comparison else 'black'
+    st.markdown(f'- :{colour}[{percentage_change_abs}% {comparison} week {analysis_end_week} in {year}]')
 
 
 fig_deaths_trends = make_subplots(specs=[[{'secondary_y': False}]])
@@ -118,7 +145,6 @@ for year in years:
     )
 
 
-
 layout = go.Layout(
     height=600,
     margin=dict(l=50, r=50, b=100, t=100, pad=4),
@@ -128,7 +154,7 @@ layout = go.Layout(
     legend=dict(
         orientation="h",
         yanchor="bottom",
-        y=-0.3,
+        y=-0.4,
         xanchor="left",
         x=0.01
     ),
@@ -164,27 +190,17 @@ fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
 #     x=0.01
 # ))
 
+
+
 st.plotly_chart(fig_deaths_trends, use_container_width=True, theme=None)
 
-if st.checkbox('Show raw data'):
+if show_raw_data:
     st.subheader('Raw data')
     st.write(all_weekly_deaths_df)
 
 
-@st.cache_data
-def convert_df(df):
-    # IMPORTANT: Cache the conversion to prevent computation on every rerun
-    return df.to_csv().encode('utf-8')
 
 
-csv = convert_df(all_weekly_deaths_df)
-
-st.download_button(
-    label="Download as CSV",
-    data=csv,
-    file_name='all_weekly_deaths.csv',
-    mime='text/csv',
-)
 
 # with st.echo(code_location='below'):
 #     total_points = st.slider('Number of points in spiral', 1, 5000, 2000)
