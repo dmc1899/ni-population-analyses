@@ -103,9 +103,6 @@ with st.sidebar:
 #     print(f' * {percentage_change_abs}% {comparison} week {analysis_end_week} in {year}')
 
 
-
-
-
 fig_deaths_trends = make_subplots(specs=[[{'secondary_y': False}]])
 
 years = [mean_value_selected, '2020', '2021', '2022', '2023']
@@ -123,11 +120,18 @@ for year in years:
 
 
 layout = go.Layout(
-    height=800,
+    height=600,
     margin=dict(l=50, r=50, b=100, t=100, pad=4),
     title=dict(text=f'Weekly Deaths 2020-2023 (up to Week {analysis_end_week}) by Date of Registration versus {mean_value_selected}'),
     xaxis=dict(title_text='Week of Year', type='category', tickmode='linear', tick0=1, dtick=1),
     yaxis=dict(title_text='Deaths'),
+    legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=-0.3,
+        xanchor="left",
+        x=0.01
+    ),
     # annotations=[dict(
     #     x='8.1',
     #     y=324,
@@ -151,9 +155,16 @@ layout = go.Layout(
     # )]
 )
 fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
-#fig_deaths_trends.show()
-#st.plotly_chart(fig_deaths_trends)
-st.plotly_chart(fig_deaths_trends, use_container_width=True)
+
+# fig_deaths_trends.update_layout(legend=dict(
+#     orientation="h",
+#     yanchor="bottom",
+#     y=-0.,
+#     xanchor="left",
+#     x=0.01
+# ))
+
+st.plotly_chart(fig_deaths_trends, use_container_width=True, theme=None)
 
 if st.checkbox('Show raw data'):
     st.subheader('Raw data')
