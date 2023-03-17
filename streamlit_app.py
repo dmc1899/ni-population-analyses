@@ -153,9 +153,9 @@ for year in years:
 
 layout = go.Layout(
     height=600,
-    margin=dict(l=50, r=50, b=100, t=100, pad=4),
-    title=dict(text=f'Weekly Deaths 2020-2023 (up to Week {analysis_end_week_selected}) by Date of Registration versus {mean_value_selected} 5yr average.'),
-    xaxis=dict(title_text='Week of Year', type='category', tickmode='linear', tick0=1, dtick=1),
+    margin=dict(l=50, r=50, b=50, t=50, pad=4),
+    title=dict(text=f'Weekly Deaths 2020-2023 (up to Week {analysis_end_week_selected}) by Date of Registration versus {mean_value_selected} 5yr average'),
+    xaxis=dict(title_text='Registration Week', type='category', tickmode='linear', tick0=1, dtick=1),
     yaxis=dict(title_text='Deaths'),
     legend=dict(
         orientation="h",
@@ -203,7 +203,52 @@ if show_raw_data_selected:
     st.write(all_weekly_deaths_df)
 
 
+all_weekly_deaths_df_copy = all_weekly_deaths_df.copy()
+all_weekly_deaths_df_copy['week_name'] = all_weekly_deaths_df_copy.index
 
+import matplotlib.pyplot as plt
+from matplotlib.ticker import AutoMinorLocator, MultipleLocator
+
+fig, axs = plt.subplots(1, 1, constrained_layout=True, figsize=(10,4))
+
+#fig.suptitle('NI Excess Weekly Deaths 2020-2023 against 2015-2019 Mean', color='black')
+
+years_to_compare = ['2023']
+index=0
+
+for year in years_to_compare:
+
+    axs.set_title(f'Weekly Deaths 2023 (up to Week {analysis_end_week_selected}) by Date of Registration versus {mean_value_selected} 5yr average', fontsize=10, verticalalignment='top', color='black', pad=18.0)
+
+    x = all_weekly_deaths_df_copy['Registration_Week'].loc[0:(analysis_end_week_selected - 1)] if year == "2023" else all_weekly_deaths_df_copy['Registration_Week']
+    y1 = all_weekly_deaths_df_copy[mean_value_to_plot].loc[0:(analysis_end_week_selected - 1)] if year == "2023" else all_weekly_deaths_df_copy[mean_value_to_plot]
+
+    y2 = all_weekly_deaths_df_copy[f'{year}'].loc[0:(analysis_end_week_selected - 1)] if year == "2023" else all_weekly_deaths_df_copy[f'{year}']
+
+    axs.set_xlim(1, 52)
+    axs.set_ylim(200, 550)
+
+    axs.grid(linestyle="--", linewidth=0.25, color='.5', zorder=-10)
+
+    axs.plot(x, y1, color='red', lw=0.5, label=mean_value_selected, linestyle="--")
+    axs.plot(x, y2, color='dimgrey', lw=0.5, label=f'{year}')
+
+    axs.fill_between(x, y1, y2, where=y2 >= y1, facecolor='lightcoral', interpolate=True)
+    axs.fill_between(x, y1, y2, where=y2 <= y1, facecolor='palegreen', interpolate=True)
+
+    axs.set_xlabel("Registration Week", fontsize=9)
+    axs.set_ylabel("Deaths", fontsize=9)
+
+    axs.xaxis.set_major_locator(MultipleLocator(1))
+
+    axs.tick_params(which='major', width=1.0, length=10, labelsize=8)
+    axs.tick_params(which='minor', width=1.0, length=5, labelsize=8, labelcolor='0.25')
+
+    axs.legend(loc="upper right", fontsize=9)
+
+    index+=1
+
+st.pyplot(fig)
 # with st.echo(code_location='below'):
 #     total_points = st.slider('Number of points in spiral', 1, 5000, 2000)
 #     num_turns = st.slider('Number of turns in spiral', 1, 100, 9)
