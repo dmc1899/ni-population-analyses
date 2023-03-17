@@ -3,17 +3,20 @@ import math
 
 import pandas as pd
 import plotly.graph_objects as go
+import streamlit
 import streamlit as st
 from plotly.subplots import make_subplots
 
 st.set_page_config(layout='wide')
 
 # Title the app
-st.title('Northern Ireland Weekly Deaths 2023 YTD')
+st.title('Northern Ireland Population Analyses')
+st.caption('Use the sidebar on the left to configure parameters for your analyses.')
 
-st.markdown("""
-:gray[Use the menu on the left to configure parameters for analysis]. 
-""")
+st.markdown('''
+## Weekly death registrations for 2023 YTD
+Weekly death statistics dataset sourced from [NISRA Weekly death registrations in Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/weekly-death-registrations-northern-ireland).
+''')
 
 
 @st.cache_data
@@ -65,18 +68,19 @@ mean_value_selected = label_five_year_average_2015_to_2019
 
 with st.sidebar:
 
-    st.markdown("### Select week and historical average")
+    st.markdown("### Configure week and average")
 
-    analysis_end_week_selected = st.number_input('Select 2023 registration week:', min_value=1, max_value=9, step=1, value=9,
+    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=9, step=1, value=9,
                                                  help='The week in the current year up to which points are plotted.')
 
     mean_value_selected = st.radio(
-        "Select five-year average to compare against:",
+        "Five-year Average:",
         (label_five_year_average_2015_to_2019, label_five_year_average_2016_to_2020,
          label_five_year_average_2017_to_2021, label_five_year_average_2016_to_2019_and_2021),
         index=0, help='Institutions such as NISRA or ONS use different 5-year averages for comparison. '\
                       'Select the average to include the plot.')
 
+    st.markdown("### Access underlying data")
     show_raw_data_selected = st.checkbox('Show raw data', value= False, help='Display raw data below the plot.')
 
     st.download_button(
@@ -96,9 +100,9 @@ elif mean_value_selected == label_five_year_average_2017_to_2021:
 elif mean_value_selected == label_five_year_average_2016_to_2019_and_2021:
     mean_value_to_plot = '2016_to_2019_and_2021_Mean'
 
-st.markdown(f"""
-## Analysis for Registration Week {analysis_end_week_selected} 2023:
-""")
+st.markdown(f'''
+### Analysis for Registration Week {analysis_end_week_selected} 2023
+''')
 
 comparison_years = ['2022', '2021', '2020', mean_value_to_plot]
 this_week_2023 = get_deaths_for(all_weekly_deaths_df, analysis_end_week_selected, '2023')
@@ -121,12 +125,6 @@ result_tuples = [
     ('2020', results['this_week_2020_vs_2023']),
     (f'{mean_value_to_plot}', results[f'this_week_{mean_value_to_plot}_vs_2023'])
 ]
-
-#streamlit.write(result_tuples)
-#
-
-#st.markdown('Streamlit is **_really_ cool**.')
-#st.markdown(”This text is :red[colored red], and this is **:blue[colored]** and bold.”)
 
 st.markdown(f'Registration Week **{analysis_end_week_selected} in 2023** had **{this_week_2023}** registered deaths which is:')
 
@@ -198,15 +196,11 @@ fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
 #     x=0.01
 # ))
 
-
-
 st.plotly_chart(fig_deaths_trends, use_container_width=True, theme=None)
 
 if show_raw_data_selected:
     st.subheader('Raw data')
     st.write(all_weekly_deaths_df)
-
-
 
 
 
