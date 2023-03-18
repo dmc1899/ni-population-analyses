@@ -2,8 +2,8 @@ import streamlit as st
 
 st.set_page_config(
     page_title="Northern Ireland Population Analyses",
-    page_icon="👋",
-    layout='wide'
+    page_icon="chart_with_upwards_trend", #page_icon="👋",
+    # layout='wide'
 )
 
 st.markdown("# Northern Ireland Population Analyses Data Application")
@@ -18,3 +18,6 @@ st.markdown(
     exploring.
 """
 )
+
+st.image('img/bonhoeffer.jpg', use_column_width=True)
+st.caption('[Image credit](https://www.insightforliving.ca/read/articles/dietrich-bonhoeffer)')
