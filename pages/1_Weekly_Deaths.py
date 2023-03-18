@@ -10,7 +10,7 @@ from plotly.subplots import make_subplots
 st.set_page_config(layout='wide')
 
 # Title the app
-st.title('Northern Ireland Population Analyses')
+st.title('Weekly Death Statistics')
 st.caption('Use the sidebar on the left to configure parameters for your analyses.')
 
 st.markdown('''
@@ -21,7 +21,7 @@ Weekly death statistics dataset sourced from [NISRA Weekly death registrations i
 
 @st.cache_data
 def load_data():
-    dataframe = pd.read_pickle('data/AllDeathsUpTo2023Week9.pkl')
+    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week9.pkl')
     return dataframe
 
 
