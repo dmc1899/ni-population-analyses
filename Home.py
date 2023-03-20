@@ -1,22 +1,23 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="Northern Ireland Population Analyses",
+    page_title="NI Population Analyses",
     page_icon="chart_with_upwards_trend", #page_icon="👋",
     # layout='wide'
 )
 
-st.markdown("# Northern Ireland Population Analyses Data Application")
+st.markdown('''# NI Demographic Data Application
+''')
 
 st.markdown(
-    """
-    This is a data application to support exploratory analyses
+    '''
+    This is an online application to support exploratory analyses
     of open datasets relating to births, deaths and other population
-    characteristics for Northern Ireland in and around the pandemic period.
+    demographics for Northern Ireland specifically around the pandemic period.
     
     **👈 Select an area of interest from the sidebar** to start 
     exploring.
-"""
+'''
 )
 
 st.image('img/bonhoeffer.jpg', use_column_width=True)

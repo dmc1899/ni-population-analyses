@@ -13,9 +13,6 @@ st.set_page_config(layout='wide')
 st.title('Monthly Birth Statistics (2006 - Present)')
 st.caption('Use the sidebar on the left to configure parameters for your analyses.')
 
-st.markdown('''
-Monthly birth statistics dataset sourced from [NISRA Monthly Births Registered in Northern Ireland](https://www.nisra.gov.uk/publications/monthly-births).
-''')
 
 st.markdown('''
 ## Absolute lowest registered monthly births
@@ -86,7 +83,8 @@ fig.update_layout(legend_title_text='Year')
 st.plotly_chart(fig, use_container_width=True, theme=None)
 
 
-
+st.caption('Monthly birth statistics dataset sourced from [NISRA Monthly Births Registered in Northern Ireland]'
+           '(https://www.nisra.gov.uk/publications/monthly-births).')
 
 # def get_deaths_for(df, week, column):
 #     return df.loc[df['Registration_Week'] == week, column].values[0]

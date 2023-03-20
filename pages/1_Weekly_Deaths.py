@@ -10,13 +10,8 @@ from plotly.subplots import make_subplots
 st.set_page_config(layout='wide')
 
 # Title the app
-st.title('Weekly Death Statistics')
+st.title('Weekly Death Statistics (2023 YTD)')
 st.caption('Use the sidebar on the left to configure parameters for your analyses.')
-
-st.markdown('''
-## Weekly death registrations for 2023 YTD
-Weekly death statistics dataset sourced from [NISRA Weekly death registrations in Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/weekly-death-registrations-northern-ireland).
-''')
 
 
 @st.cache_data
@@ -198,9 +193,7 @@ fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
 
 st.plotly_chart(fig_deaths_trends, use_container_width=True, theme=None)
 
-if show_raw_data_selected:
-    st.subheader('Raw data')
-    st.write(all_weekly_deaths_df)
+
 
 
 all_weekly_deaths_df_copy = all_weekly_deaths_df.copy()
@@ -249,23 +242,10 @@ for year in years_to_compare:
     index+=1
 
 st.pyplot(fig)
-# with st.echo(code_location='below'):
-#     total_points = st.slider('Number of points in spiral', 1, 5000, 2000)
-#     num_turns = st.slider('Number of turns in spiral', 1, 100, 9)
-#
-#     Point = namedtuple('Point', 'x y')
-#     data = []
-#
-#     points_per_turn = total_points / num_turns
-#
-#     for curr_point_num in range(total_points):
-#         curr_turn, i = divmod(curr_point_num, points_per_turn)
-#         angle = (curr_turn + 1) * 2 * math.pi * i / points_per_turn
-#         radius = curr_point_num / total_points
-#         x = radius * math.cos(angle)
-#         y = radius * math.sin(angle)
-#         data.append(Point(x, y))
-#
-#     st.altair_chart(alt.Chart(pd.DataFrame(data), height=500, width=500)
-#         .mark_circle(color='#0068c9', opacity=0.5)
-#         .encode(x='x:Q', y='y:Q'))
+
+if show_raw_data_selected:
+    st.subheader('Raw data')
+    st.write(all_weekly_deaths_df)
+
+
+st.caption('Weekly death statistics dataset sourced from [NISRA Weekly death registrations in Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/weekly-death-registrations-northern-ireland).')
