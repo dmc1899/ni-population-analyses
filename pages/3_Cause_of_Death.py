@@ -54,10 +54,10 @@ for age_group in age_groups:
                  facet_col_wrap=1,
                  color='Cause_of_Death',
                  text_auto=True,
-                 category_orders={"Period": ['2018-Q1','2018-Q2','2018-Q3','2018-Q4','2019-Q1','2019-Q2', \
-                                             '2019-Q3','2019-Q4', '2020-Q1', '2020-Q2', '2020-Q3', '2020-Q4', \
+                 category_orders={"Period": ['2018-Q1', '2018-Q2','2018-Q3','2018-Q4','2019-Q1','2019-Q2', \
+                                             '2019-Q3', '2019-Q4', '2020-Q1', '2020-Q2', '2020-Q3', '2020-Q4', \
                                              '2021-Q1', '2021-Q2', '2021-Q3', '2021-Q4', '2022-Q1', '2022-Q2', \
-                                             '2022-Q3','2022-Q4']},
+                                             '2022-Q3', '2022-Q4']},
                  height=600)
 
     # Set x-axis title
@@ -71,7 +71,7 @@ for age_group in age_groups:
     fig.update_layout(legend=dict(
         orientation="h",
         yanchor="bottom",
-        y=-1.0,
+        y=-0.5,
         xanchor="left",
         x=0.01
     ))
