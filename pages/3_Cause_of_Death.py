@@ -58,7 +58,7 @@ for age_group in age_groups:
                                              '2019-Q3', '2019-Q4', '2020-Q1', '2020-Q2', '2020-Q3', '2020-Q4', \
                                              '2021-Q1', '2021-Q2', '2021-Q3', '2021-Q4', '2022-Q1', '2022-Q2', \
                                              '2022-Q3', '2022-Q4']},
-                 height=600)
+                 height=800)
 
     # Set x-axis title
     fig.update_xaxes(title_text="Period", showgrid=True)
