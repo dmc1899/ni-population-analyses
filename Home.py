@@ -12,7 +12,7 @@ st.markdown(
     """
     This is a data application to support exploratory analyses
     of open datasets relating to births, deaths and other population
-    characteristics for Northern Ireland.
+    characteristics for Northern Ireland in and around the pandemic period.
     
     **👈 Select an area of interest from the sidebar** to start 
     exploring.
