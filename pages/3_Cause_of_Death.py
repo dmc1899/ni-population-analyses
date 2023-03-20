@@ -71,7 +71,7 @@ for age_group in age_groups:
     fig.update_layout(legend=dict(
         orientation="h",
         yanchor="bottom",
-        y=-0.5,
+        y=-2.0,
         xanchor="left",
         x=0.01
     ))
