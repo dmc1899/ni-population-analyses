@@ -68,6 +68,13 @@ for age_group in age_groups:
 
     #fig.update_layout(uniformtext_minsize=12, uniformtext_mode='hide')
 
+    fig.update_layout(legend=dict(
+        orientation="h",
+        yanchor="bottom",
+        y=-0.6,
+        xanchor="left",
+        x=0.01
+    ))
     # Set Legend Name
     fig.update_layout(legend_title_text='Cause of Death')
 
