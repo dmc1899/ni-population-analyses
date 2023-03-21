@@ -32,6 +32,19 @@ analysis_end_month_for_births = 12
 age_breakdown_df = load_data()
 csv = convert_df(age_breakdown_df)
 
+with st.sidebar:
+
+    st.markdown("### Access underlying data")
+    show_raw_data_selected = st.checkbox('Show raw data', value = False, help='Display raw data below the plot.')
+
+    st.download_button(
+        label="Download as CSV",
+        data=csv,
+        file_name='all_weekly_deaths.csv',
+        mime='text/csv',
+        help='Download the raw data as a CSV file.'
+    )
+
 
 age_groups = ['<1', '1-14', '15-34', '35-44', '45-54', '55-64', '65-74', '75-79', '80-84', '85-89', '>90']
 
@@ -72,6 +85,10 @@ for age_group in age_groups:
     fig.update_layout(legend_title_text='Cause of Death')
 
     st.plotly_chart(fig, use_container_width=True, theme=None)
+
+if show_raw_data_selected:
+    st.subheader('Raw data')
+    st.write(age_breakdown_df)
 
 st.caption('''
 Cause of death statistics datasets sourced from [NISRA Register General Quarterly Tables](https://www.nisra.gov.uk/statistics/registrar-general-quarterly-report/registrar-general-quarterly-tables).
