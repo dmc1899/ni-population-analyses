@@ -3,13 +3,11 @@ import math
 
 import pandas as pd
 import plotly.graph_objects as go
-import streamlit
 import streamlit as st
 from plotly.subplots import make_subplots
 
 st.set_page_config(layout='wide')
 
-# Title the app
 st.title('Weekly Death Statistics (2023 YTD)')
 st.caption('Use the sidebar on the left to configure parameters for your analyses.')
 
@@ -239,7 +237,7 @@ for year in years_to_compare:
 
     axs.legend(loc="upper right", fontsize=9)
 
-    index+=1
+    index += 1
 
 st.pyplot(fig)
 
