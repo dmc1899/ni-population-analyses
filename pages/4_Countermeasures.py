@@ -85,3 +85,19 @@ with tab1:
     st.caption('''
     Injection distribution data sourced from [HSC Vaccination Dashboard](https://covid-19.hscni.net/ni-covid-19-vaccinations-dashboard/).
     ''')
+
+import base64
+
+with tab2:
+    def display_pdf(file):
+        # Opening file from file path
+        with open(file, "rb") as f:
+            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+
+            # Embedding PDF in HTML
+        pdf_display = F'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+
+        # Displaying File
+        st.markdown(pdf_display, unsafe_allow_html=True)
+
+    display_pdf('doc/mrna-20200630.pdf')
