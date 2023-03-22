@@ -100,4 +100,4 @@ with tab2:
         # Displaying File
         st.markdown(pdf_display, unsafe_allow_html=True)
 
-    display_pdf('doc/mrna-20200630.pdf')
+    display_pdf('doc/injection/mrna-20200630.pdf')
