@@ -158,6 +158,7 @@ layout = go.Layout(
         x=0.01
     ),
 )
+
 fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
 
 st.plotly_chart(fig_deaths_trends, use_container_width=True, theme=None)
