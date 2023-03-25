@@ -9,7 +9,7 @@ from plotly.subplots import make_subplots
 st.set_page_config(layout='wide')
 
 st.title('Weekly Death Statistics (2023 YTD)')
-st.caption('Use the sidebar on the left to configure parameters for your analyses.')
+st.caption('Use the sidebar on the left to configure parameters for your analysis.')
 
 
 @st.cache_data
@@ -128,10 +128,9 @@ for year, percentage_change in result_tuples:
     colour = 'red' if 'higher' in comparison else 'black'
     st.markdown(f'- :{colour}[{percentage_change_abs}% {comparison} week {analysis_end_week_selected} in {year}]')
 
+years = [mean_value_to_plot, '2020', '2021', '2022', '2023']
 
 fig_deaths_trends = make_subplots(specs=[[{'secondary_y': False}]])
-
-years = [mean_value_to_plot, '2020', '2021', '2022', '2023']
 
 for year in years:
     fig_deaths_trends.add_trace(
@@ -142,7 +141,6 @@ for year in years:
                    line_dash='dot' if 'Mean' in year else None),
         secondary_y=False,
     )
-
 
 layout = go.Layout(
     height=600,
@@ -157,42 +155,10 @@ layout = go.Layout(
         xanchor="left",
         x=0.01
     ),
-    # annotations=[dict(
-    #     x='8.1',
-    #     y=324,
-    #     xref='x',
-    #     yref='y',
-    #     text='Week Ending 3rd March 2023',
-    #     showarrow=True,
-    #     font=dict(family='Arial', size=11, color='#020202'),
-    #     align='left',
-    #     arrowhead=2,
-    #     arrowsize=1,
-    #     arrowwidth=2,
-    #     arrowcolor='#636363',
-    #     ax=70,
-    #     ay=-250,
-    #     bordercolor='#c7c7c7',
-    #     borderwidth=2,
-    #     borderpad=4,
-    #     bgcolor='#ddd9d8 ',
-    #     opacity=0.8
-    # )]
 )
 fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
 
-# fig_deaths_trends.update_layout(legend=dict(
-#     orientation="h",
-#     yanchor="bottom",
-#     y=-0.,
-#     xanchor="left",
-#     x=0.01
-# ))
-
 st.plotly_chart(fig_deaths_trends, use_container_width=True, theme=None)
-
-
-
 
 all_weekly_deaths_df_copy = all_weekly_deaths_df.copy()
 all_weekly_deaths_df_copy['week_name'] = all_weekly_deaths_df_copy.index
@@ -201,8 +167,6 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import AutoMinorLocator, MultipleLocator
 
 fig, axs = plt.subplots(1, 1, constrained_layout=True, figsize=(10,4))
-
-#fig.suptitle('NI Excess Weekly Deaths 2020-2023 against 2015-2019 Mean', color='black')
 
 years_to_compare = ['2023']
 index=0
