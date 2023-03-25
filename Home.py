@@ -6,6 +6,22 @@ st.set_page_config(
     # layout='wide'
 )
 
+
+def add_bg_from_url():
+    st.markdown(
+        f"""
+         <style>
+         .stApp {{
+             background-image: url("img/a-book-gcb51cc40a_1920.jpg");
+             background-attachment: fixed;
+             background-size: cover
+         }}
+         </style>
+         """,
+        unsafe_allow_html=True
+    )
+
+add_bg_from_url()
 st.markdown('''# NI Demographic Data Application
 ''')
 
