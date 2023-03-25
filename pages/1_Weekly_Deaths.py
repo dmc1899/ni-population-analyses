@@ -14,7 +14,7 @@ st.caption('Use the sidebar on the left to configure parameters for your analysi
 
 @st.cache_data
 def load_data():
-    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week9.pkl')
+    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week10.pkl')
     return dataframe
 
 
@@ -56,14 +56,14 @@ label_five_year_average_2017_to_2021 = '2017 - 2021'
 label_five_year_average_2016_to_2019_and_2021 = '2016 - 2019 and 2021'
 
 # Default UI settings
-analysis_end_week_selected = 9
+analysis_end_week_selected = 10
 mean_value_selected = label_five_year_average_2015_to_2019
 
 with st.sidebar:
 
     st.markdown("### Configure week and average")
 
-    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=9, step=1, value=9,
+    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=10, step=1, value=10,
                                                  help='The week in the current year up to which points are plotted.')
 
     mean_value_selected = st.radio(
@@ -93,6 +93,8 @@ elif mean_value_selected == label_five_year_average_2017_to_2021:
 elif mean_value_selected == label_five_year_average_2016_to_2019_and_2021:
     mean_value_to_plot = '2016_to_2019_and_2021_Mean'
 
+mean_value_selected = mean_value_selected + ' 5yr average'
+
 st.markdown(f'''
 ### Analysis for Registration Week {analysis_end_week_selected} 2023
 ''')
@@ -116,7 +118,7 @@ result_tuples = [
     ('2022', results['this_week_2022_vs_2023']),
     ('2021', results['this_week_2021_vs_2023']),
     ('2020', results['this_week_2020_vs_2023']),
-    (f'{mean_value_to_plot}', results[f'this_week_{mean_value_to_plot}_vs_2023'])
+    (f'{mean_value_selected}', results[f'this_week_{mean_value_to_plot}_vs_2023'])
 ]
 
 st.markdown(f'Registration Week **{analysis_end_week_selected} in 2023** had **{this_week_2023}** registered deaths which is:')
@@ -145,7 +147,7 @@ for year in years:
 layout = go.Layout(
     height=600,
     margin=dict(l=50, r=50, b=50, t=50, pad=4),
-    title=dict(text=f'Weekly Deaths 2020-2023 (up to Week {analysis_end_week_selected}) by Date of Registration versus {mean_value_selected} 5yr average'),
+    title=dict(text=f'Weekly Deaths 2020-2023 (up to Week {analysis_end_week_selected}) by Date of Registration versus {mean_value_selected}'),
     xaxis=dict(title_text='Registration Week', type='category', tickmode='linear', tick0=1, dtick=1),
     yaxis=dict(title_text='Deaths'),
     legend=dict(
@@ -156,6 +158,7 @@ layout = go.Layout(
         x=0.01
     ),
 )
+
 fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
 
 st.plotly_chart(fig_deaths_trends, use_container_width=True, theme=None)
