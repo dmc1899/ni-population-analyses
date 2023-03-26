@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(
     page_title="NI Population Analyses",
     page_icon="chart_with_upwards_trend", #page_icon="👋",
-    # layout='wide'
+    #layout='wide'
 )
 
 
@@ -12,7 +12,7 @@ def add_bg_from_url():
         f"""
          <style>
          .stApp {{
-             background-image: url("img/a-book-gcb51cc40a_1920.jpg");
+             background-image: url("https://images.pexels.com/photos/316466/pexels-photo-316466.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
              background-attachment: fixed;
              background-size: cover
          }}
@@ -21,18 +21,18 @@ def add_bg_from_url():
         unsafe_allow_html=True
     )
 
-add_bg_from_url()
-st.markdown('''# NI Demographic Data Application
+#add_bg_from_url()
+st.markdown('''# Covidera Demographics for Northern Ireland
 ''')
+st.caption('👈 Select an area of interest from the sidebar to start exploring.')
 
 st.markdown(
     '''
-    This is an online application to support exploratory analyses
-    of open datasets relating to births, deaths and other population
-    demographics for Northern Ireland specifically around the pandemic period.
+    This [data application](https://acho.io/blogs/what-is-a-data-application) provides exploratory analyses of 
+    open demographic datasets for Northern Ireland specifically in and around the COVID-19 pandemic and pandemic 
+    response period (AKA the Covidera).
     
-    **👈 Select an area of interest from the sidebar** to start 
-    exploring.
+    Analyses includes births, deaths, countermeasures and the interrelationship between them.
 '''
 )
 

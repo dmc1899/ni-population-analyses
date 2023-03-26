@@ -11,7 +11,7 @@ st.set_page_config(layout='wide')
 
 # Title the app
 st.title('Monthly Birth Statistics (2006 - Present)')
-st.caption('Use the sidebar on the left to configure parameters for your analyses.')
+st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 
 st.markdown('''
