@@ -11,7 +11,7 @@ st.set_page_config(layout='wide')
 
 # Title the app
 st.title('Monthly Birth Statistics (2006 - Present)')
-st.caption('👈 Use the sidebar to configure parameters for your analysis.')
+#st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 
 st.markdown('''
@@ -99,6 +99,7 @@ if show_raw_data_selected:
     st.subheader('Raw data')
     st.write(all_monthly_births_df)
 
+st.markdown('---')
 st.caption('Monthly birth statistics dataset sourced from [NISRA Monthly Births Registered in Northern Ireland]'
            '(https://www.nisra.gov.uk/publications/monthly-births).')
 

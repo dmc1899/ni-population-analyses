@@ -90,6 +90,7 @@ if show_raw_data_selected:
     st.subheader('Raw data')
     st.write(age_breakdown_df)
 
+st.markdown('---')
 st.caption('''
 Cause of death statistics datasets sourced from [NISRA Register General Quarterly Tables](https://www.nisra.gov.uk/statistics/registrar-general-quarterly-report/registrar-general-quarterly-tables).
 ''')
