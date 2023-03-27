@@ -176,7 +176,9 @@ index=0
 
 for year in years_to_compare:
 
-    axs.set_title(f'Weekly Deaths 2023 (up to Week {analysis_end_week_selected}) by Date of Registration versus {mean_value_selected} 5yr average', fontsize=10, verticalalignment='top', color='black', pad=18.0)
+    axs.set_title(f'Weekly Deaths 2023 (up to Week {analysis_end_week_selected}) by '
+                  f'Date of Registration versus {mean_value_selected}', fontsize=10,
+                  verticalalignment='top', color='black', pad=18.0)
 
     x = all_weekly_deaths_df_copy['Registration_Week'].loc[0:(analysis_end_week_selected - 1)] if year == "2023" else all_weekly_deaths_df_copy['Registration_Week']
     y1 = all_weekly_deaths_df_copy[mean_value_to_plot].loc[0:(analysis_end_week_selected - 1)] if year == "2023" else all_weekly_deaths_df_copy[mean_value_to_plot]
