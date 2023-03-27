@@ -212,5 +212,7 @@ if show_raw_data_selected:
     st.subheader('Raw data')
     st.write(all_weekly_deaths_df)
 
-
-st.caption('Weekly death statistics dataset sourced from [NISRA Weekly death registrations in Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/weekly-death-registrations-northern-ireland).')
+st.markdown('---')
+st.caption('Weekly death statistics dataset sourced from [NISRA Weekly death registrations in '
+           'Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/'
+           'weekly-death-registrations-northern-ireland).')

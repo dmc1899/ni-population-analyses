@@ -1,9 +1,9 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="NI Population Analyses",
+    page_title="Pandemic Period Data",
     page_icon="chart_with_upwards_trend", #page_icon="👋",
-    #layout='wide'
+    layout='wide'
 )
 
 
@@ -22,15 +22,15 @@ def add_bg_from_url():
     )
 
 #add_bg_from_url()
-st.markdown('''# Covidera Demographics for Northern Ireland
+st.markdown('''# Pandemic Period Insights for Northern Ireland
 ''')
 st.caption('👈 Select an area of interest from the sidebar to start exploring.')
 
 st.markdown(
     '''
     This [data application](https://acho.io/blogs/what-is-a-data-application) provides exploratory analyses of 
-    open demographic datasets for Northern Ireland specifically in and around the COVID-19 pandemic and pandemic 
-    response period (AKA the Covidera).
+    open datasets for Northern Ireland specifically around the COVID-19 pandemic and pandemic 
+    response period.
     
     Analyses includes births, deaths, countermeasures and the interrelationship between them.
 '''
