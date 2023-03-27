@@ -9,7 +9,7 @@ from plotly.subplots import make_subplots
 
 st.set_page_config(layout='wide')
 
-st.title('Injections & Deaths Exploratory Analysis')
+st.title('Injections & Impact on Deaths')
 st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 
