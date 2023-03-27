@@ -9,12 +9,12 @@ from plotly.subplots import make_subplots
 st.set_page_config(layout='wide')
 
 st.title('Weekly Death Statistics (2023 YTD)')
-st.caption('Use the sidebar on the left to configure parameters for your analyses.')
+st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 
 @st.cache_data
 def load_data():
-    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week9.pkl')
+    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week10.pkl')
     return dataframe
 
 
@@ -56,14 +56,14 @@ label_five_year_average_2017_to_2021 = '2017 - 2021'
 label_five_year_average_2016_to_2019_and_2021 = '2016 - 2019 and 2021'
 
 # Default UI settings
-analysis_end_week_selected = 9
+analysis_end_week_selected = 10
 mean_value_selected = label_five_year_average_2015_to_2019
 
 with st.sidebar:
 
     st.markdown("### Configure week and average")
 
-    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=9, step=1, value=9,
+    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=10, step=1, value=10,
                                                  help='The week in the current year up to which points are plotted.')
 
     mean_value_selected = st.radio(
@@ -93,6 +93,8 @@ elif mean_value_selected == label_five_year_average_2017_to_2021:
 elif mean_value_selected == label_five_year_average_2016_to_2019_and_2021:
     mean_value_to_plot = '2016_to_2019_and_2021_Mean'
 
+mean_value_selected = mean_value_selected + ' 5yr average'
+
 st.markdown(f'''
 ### Analysis for Registration Week {analysis_end_week_selected} 2023
 ''')
@@ -116,7 +118,7 @@ result_tuples = [
     ('2022', results['this_week_2022_vs_2023']),
     ('2021', results['this_week_2021_vs_2023']),
     ('2020', results['this_week_2020_vs_2023']),
-    (f'{mean_value_to_plot}', results[f'this_week_{mean_value_to_plot}_vs_2023'])
+    (f'{mean_value_selected}', results[f'this_week_{mean_value_to_plot}_vs_2023'])
 ]
 
 st.markdown(f'Registration Week **{analysis_end_week_selected} in 2023** had **{this_week_2023}** registered deaths which is:')
@@ -128,10 +130,9 @@ for year, percentage_change in result_tuples:
     colour = 'red' if 'higher' in comparison else 'black'
     st.markdown(f'- :{colour}[{percentage_change_abs}% {comparison} week {analysis_end_week_selected} in {year}]')
 
+years = [mean_value_to_plot, '2020', '2021', '2022', '2023']
 
 fig_deaths_trends = make_subplots(specs=[[{'secondary_y': False}]])
-
-years = [mean_value_to_plot, '2020', '2021', '2022', '2023']
 
 for year in years:
     fig_deaths_trends.add_trace(
@@ -143,11 +144,10 @@ for year in years:
         secondary_y=False,
     )
 
-
 layout = go.Layout(
     height=600,
     margin=dict(l=50, r=50, b=50, t=50, pad=4),
-    title=dict(text=f'Weekly Deaths 2020-2023 (up to Week {analysis_end_week_selected}) by Date of Registration versus {mean_value_selected} 5yr average'),
+    title=dict(text=f'Weekly Deaths 2020-2023 (up to Week {analysis_end_week_selected}) by Date of Registration versus {mean_value_selected}'),
     xaxis=dict(title_text='Registration Week', type='category', tickmode='linear', tick0=1, dtick=1),
     yaxis=dict(title_text='Deaths'),
     legend=dict(
@@ -157,42 +157,11 @@ layout = go.Layout(
         xanchor="left",
         x=0.01
     ),
-    # annotations=[dict(
-    #     x='8.1',
-    #     y=324,
-    #     xref='x',
-    #     yref='y',
-    #     text='Week Ending 3rd March 2023',
-    #     showarrow=True,
-    #     font=dict(family='Arial', size=11, color='#020202'),
-    #     align='left',
-    #     arrowhead=2,
-    #     arrowsize=1,
-    #     arrowwidth=2,
-    #     arrowcolor='#636363',
-    #     ax=70,
-    #     ay=-250,
-    #     bordercolor='#c7c7c7',
-    #     borderwidth=2,
-    #     borderpad=4,
-    #     bgcolor='#ddd9d8 ',
-    #     opacity=0.8
-    # )]
 )
+
 fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
 
-# fig_deaths_trends.update_layout(legend=dict(
-#     orientation="h",
-#     yanchor="bottom",
-#     y=-0.,
-#     xanchor="left",
-#     x=0.01
-# ))
-
 st.plotly_chart(fig_deaths_trends, use_container_width=True, theme=None)
-
-
-
 
 all_weekly_deaths_df_copy = all_weekly_deaths_df.copy()
 all_weekly_deaths_df_copy['week_name'] = all_weekly_deaths_df_copy.index
@@ -202,14 +171,14 @@ from matplotlib.ticker import AutoMinorLocator, MultipleLocator
 
 fig, axs = plt.subplots(1, 1, constrained_layout=True, figsize=(10,4))
 
-#fig.suptitle('NI Excess Weekly Deaths 2020-2023 against 2015-2019 Mean', color='black')
-
 years_to_compare = ['2023']
 index=0
 
 for year in years_to_compare:
 
-    axs.set_title(f'Weekly Deaths 2023 (up to Week {analysis_end_week_selected}) by Date of Registration versus {mean_value_selected} 5yr average', fontsize=10, verticalalignment='top', color='black', pad=18.0)
+    axs.set_title(f'Weekly Deaths 2023 (up to Week {analysis_end_week_selected}) by '
+                  f'Date of Registration versus {mean_value_selected}', fontsize=10,
+                  verticalalignment='top', color='black', pad=18.0)
 
     x = all_weekly_deaths_df_copy['Registration_Week'].loc[0:(analysis_end_week_selected - 1)] if year == "2023" else all_weekly_deaths_df_copy['Registration_Week']
     y1 = all_weekly_deaths_df_copy[mean_value_to_plot].loc[0:(analysis_end_week_selected - 1)] if year == "2023" else all_weekly_deaths_df_copy[mean_value_to_plot]
@@ -245,5 +214,7 @@ if show_raw_data_selected:
     st.subheader('Raw data')
     st.write(all_weekly_deaths_df)
 
-
-st.caption('Weekly death statistics dataset sourced from [NISRA Weekly death registrations in Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/weekly-death-registrations-northern-ireland).')
+st.markdown('---')
+st.caption('Weekly death statistics dataset sourced from [NISRA Weekly death registrations in '
+           'Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/'
+           'weekly-death-registrations-northern-ireland).')

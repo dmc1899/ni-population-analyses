@@ -1,22 +1,38 @@
 import streamlit as st
 
 st.set_page_config(
-    page_title="NI Population Analyses",
+    page_title="Pandemic Period Data",
     page_icon="chart_with_upwards_trend", #page_icon="👋",
-    # layout='wide'
+    layout='wide'
 )
 
-st.markdown('''# NI Demographic Data Application
+
+def add_bg_from_url():
+    st.markdown(
+        f"""
+         <style>
+         .stApp {{
+             background-image: url("https://images.pexels.com/photos/316466/pexels-photo-316466.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+             background-attachment: fixed;
+             background-size: cover
+         }}
+         </style>
+         """,
+        unsafe_allow_html=True
+    )
+
+#add_bg_from_url()
+st.markdown('''# Pandemic Period Insights for Northern Ireland
 ''')
+st.caption('👈 Select an area of interest from the sidebar to start exploring.')
 
 st.markdown(
     '''
-    This is an online application to support exploratory analyses
-    of open datasets relating to births, deaths and other population
-    demographics for Northern Ireland specifically around the pandemic period.
+    This [data application](https://acho.io/blogs/what-is-a-data-application) provides exploratory analyses of 
+    open datasets for Northern Ireland specifically around the COVID-19 pandemic and pandemic 
+    response period.
     
-    **👈 Select an area of interest from the sidebar** to start 
-    exploring.
+    Analyses includes births, deaths, countermeasures and the interrelationship between them.
 '''
 )
 
