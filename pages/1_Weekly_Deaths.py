@@ -14,7 +14,7 @@ st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 @st.cache_data
 def load_data():
-    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week10.pkl')
+    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week12.pkl')
     return dataframe
 
 
@@ -41,7 +41,7 @@ def calculate_percentage_change(first_value, second_value):
     real_difference = (second_value - first_value)
 
     if first_value != 0:
-        percentage = math.floor((real_difference / first_value) * 100)
+        percentage = round((real_difference / first_value) * 100, 1)
     else:
         percentage = 0
     return percentage
@@ -56,14 +56,14 @@ label_five_year_average_2017_to_2021 = '2017 - 2021'
 label_five_year_average_2016_to_2019_and_2021 = '2016 - 2019 and 2021'
 
 # Default UI settings
-analysis_end_week_selected = 10
+analysis_end_week_selected = 12
 mean_value_selected = label_five_year_average_2015_to_2019
 
 with st.sidebar:
 
     st.markdown("### Configure week and average")
 
-    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=10, step=1, value=10,
+    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=12, step=1, value=12,
                                                  help='The week in the current year up to which points are plotted.')
 
     mean_value_selected = st.radio(

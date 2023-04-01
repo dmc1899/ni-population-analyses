@@ -98,7 +98,7 @@ fig3.add_trace(
     go.Bar(x=all_deaths_and_injections_df['Registration Year Week'],
            y=all_deaths_and_injections_df['Deaths'],
            name="Weekly Deaths",
-           opacity=0.49),
+           opacity=0.39),
     secondary_y=False, #marker.color='red' || name="Weekly Deaths", marker_color='gray', opacity=0.7)
 )
 
@@ -145,6 +145,12 @@ else:
         secondary_y=True,
     )
 
+    fig3.add_trace(
+        go.Scatter(x=all_deaths_and_injections_df['Registration Year Week'],
+                   y=all_deaths_and_injections_df['Autumn 2022 Booster'],
+                   name="Cumulative Spring 2022 Booster Dose",  line=dict(dash='dash')), #color='yellow', width=2,  visible='legendonly',
+        secondary_y=True,
+    )
 
 if show_age_group_indicators_selected:
     fig3.add_vline(x='2021W01', line_width=1, line_color='gray')
