@@ -148,7 +148,7 @@ else:
     fig3.add_trace(
         go.Scatter(x=all_deaths_and_injections_df['Registration Year Week'],
                    y=all_deaths_and_injections_df['Autumn 2022 Booster'],
-                   name="Cumulative Spring 2022 Booster Dose",  line=dict(dash='dash')), #color='yellow', width=2,  visible='legendonly',
+                   name="Cumulative Autumn 2022 Booster Dose",  line=dict(dash='dash')), #color='yellow', width=2,  visible='legendonly',
         secondary_y=True,
     )
 
