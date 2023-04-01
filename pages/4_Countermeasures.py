@@ -67,7 +67,7 @@ with tab1:
 
     fig_cumulative_injections = make_subplots(specs=[[{"secondary_y": False}]])
 
-    injections = ['Primary Dose 1', 'Primary Dose 2', 'Primary Dose 3', '1st Booster Dose', 'Spring 2022 Booster']
+    injections = ['Primary Dose 1', 'Primary Dose 2', 'Primary Dose 3', '1st Booster Dose', 'Spring 2022 Booster', 'Autumn 2022 Booster']
 
     for injection in injections:
         fig_cumulative_injections.add_trace(
@@ -81,7 +81,7 @@ with tab1:
         height=600,
         margin=dict(l=50, r=50, b=100, t=100, pad=4),
         title=dict(text="Cumulative Injections Administered"),
-        xaxis=dict(title_text="Date", type='category', tickmode = 'linear', tick0 = 1, dtick = 24),
+        xaxis=dict(title_text="Date", type='category', tickmode='linear', tick0=1, dtick=24),
         yaxis=dict(title_text="Injections"),
     )
     fig_cumulative_injections = go.Figure(data=fig_cumulative_injections.data, layout=layout)
