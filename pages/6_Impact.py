@@ -294,7 +294,7 @@ with tab2:
     csv = convert_df(df_pip_and_injections)
 
     st.markdown(f'''
-    ### Injection distribution and Weekly Deaths (Jul 2016 - Nov 2022)
+    ### Injection distribution and New Personal Independence Payment Claims (Jul 2016 - Nov 2022)
     ''')
 
     fig = make_subplots(specs=[[{"secondary_y": True}]])
