@@ -13,7 +13,6 @@ st.title('Personal Independence Payment Claims (2016 - Present)')
 #st.caption('Use the sidebar on the left to configure parameters for your analyses.')
 
 
-
 st.markdown('''
 ## New Personal Independence Payment Claims
 ''')
