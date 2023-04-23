@@ -14,14 +14,14 @@ st.title('Monthly Birth Statistics (2006 - Present)')
 #st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 
-st.markdown('''
-## Absolute lowest registered monthly births
-''')
+# st.markdown('''
+# ## Absolute lowest registered monthly births
+# ''')
 
 
 @st.cache_data
 def load_data():
-    dataframe = pd.read_pickle('data/births/AllBirthsUpToDec2022.pkl')
+    dataframe = pd.read_pickle('data/births/AllBirthsUpToJan2023.pkl')
     return dataframe
 
 
@@ -32,32 +32,32 @@ def convert_df(df):
     return df.to_csv().encode('utf-8')
 
 
-analysis_end_month_for_births = 12
+analysis_end_month_for_births = 1
 all_monthly_births_df = load_data()
 csv = convert_df(all_monthly_births_df)
 
-range_2006_to_2022 = ['2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022']
+range_2006_to_2022 = ['2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022', '2023']
 
 no_index_df = all_monthly_births_df.reset_index(drop=True)
 #no_index_df[0:analysis_end_month_for_births].style.highlight_min(range_2006_to_2022,color='red', axis=None)
-st.dataframe(no_index_df[0:analysis_end_month_for_births].style.highlight_min(range_2006_to_2022,color='red', axis=None), use_container_width=True,height=458)
+#st.dataframe(no_index_df[0:analysis_end_month_for_births].style.highlight_min(range_2006_to_2022,color='red', axis=None), use_container_width=True,height=458)
 
 
-st.markdown('''
-## Absolute highest registered monthly births
-''')
-
-st.dataframe(all_monthly_births_df[0:analysis_end_month_for_births].style.highlight_max(range_2006_to_2022, color='green', axis=None), use_container_width=True,height=458)
-
-st.markdown('''
-## Heatmap of highest and lowest monthly births for all months
-''')
-
-st.dataframe(all_monthly_births_df[0:analysis_end_month_for_births].style.background_gradient(axis=None), use_container_width=True,height=458)
-
-st.markdown('''
-## Heatmap of highest and lowest monthly births per month 
-''')
+# st.markdown('''
+# ## Absolute highest registered monthly births
+# ''')
+#
+# st.dataframe(all_monthly_births_df[0:analysis_end_month_for_births].style.highlight_max(range_2006_to_2022, color='green', axis=None), use_container_width=True,height=458)
+#
+# st.markdown('''
+# ## Heatmap of highest and lowest monthly births for all months
+# ''')
+#
+# st.dataframe(all_monthly_births_df[0:analysis_end_month_for_births].style.background_gradient(axis=None), use_container_width=True,height=458)
+#
+# st.markdown('''
+# ## Heatmap of highest and lowest monthly births per month
+# ''')
 
 with st.sidebar:
 
@@ -72,14 +72,14 @@ with st.sidebar:
         help='Download the raw data as a CSV file.'
     )
 
-st.dataframe(all_monthly_births_df[0:analysis_end_month_for_births].style.background_gradient(axis=1), use_container_width=True,height=458)
+#st.dataframe(all_monthly_births_df[0:analysis_end_month_for_births].style.background_gradient(axis=1), use_container_width=True,height=458)
 
 import plotly.express as px
 
 fig = px.bar(all_monthly_births_df,
              x='Month_of_Birth',
              y=range_2006_to_2022,
-             title='NI Total Monthly Births 2006-2022',
+             title='NI Total Monthly Births 2006-2023',
              barmode='group',
              #             facet_col='Month_of_Birth',
              height=600)
