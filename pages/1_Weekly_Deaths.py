@@ -53,6 +53,7 @@ csv = convert_df(all_weekly_deaths_df)
 label_five_year_average_2015_to_2019 = '2015 - 2019'
 label_five_year_average_2016_to_2020 = '2016 - 2020'
 label_five_year_average_2017_to_2021 = '2017 - 2021'
+label_five_year_average_2018_to_2022 = '2018 - 2022'
 label_five_year_average_2016_to_2019_and_2021 = '2016 - 2019 and 2021'
 
 # Default UI settings
@@ -69,7 +70,8 @@ with st.sidebar:
     mean_value_selected = st.radio(
         "Five-year Average:",
         (label_five_year_average_2015_to_2019, label_five_year_average_2016_to_2020,
-         label_five_year_average_2017_to_2021, label_five_year_average_2016_to_2019_and_2021),
+         label_five_year_average_2017_to_2021, label_five_year_average_2018_to_2022,
+         label_five_year_average_2016_to_2019_and_2021),
         index=0, help='Institutions such as NISRA or ONS use different 5-year averages for comparison. '\
                       'Select the average to include the plot.')
 
@@ -90,6 +92,8 @@ elif mean_value_selected == label_five_year_average_2016_to_2020:
     mean_value_to_plot = '2016_to_2020_Mean'
 elif mean_value_selected == label_five_year_average_2017_to_2021:
     mean_value_to_plot = '2017_to_2021_Mean'
+elif mean_value_selected == label_five_year_average_2018_to_2022:
+    mean_value_to_plot = '2018_to_2022_Mean'
 elif mean_value_selected == label_five_year_average_2016_to_2019_and_2021:
     mean_value_to_plot = '2016_to_2019_and_2021_Mean'
 
