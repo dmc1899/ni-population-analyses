@@ -14,7 +14,7 @@ st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 @st.cache_data
 def load_data():
-    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week21.pkl')
+    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week22.pkl')
     return dataframe
 
 
@@ -64,7 +64,7 @@ with st.sidebar:
 
     st.markdown("### Configure week and average")
 
-    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=21, step=1, value=21,
+    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=22, step=1, value=22,
                                                  help='The week in the current year up to which points are plotted.')
 
     mean_value_selected = st.radio(
