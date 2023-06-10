@@ -10,7 +10,7 @@ from plotly.subplots import make_subplots
 st.set_page_config(layout='wide')
 
 # Title the app
-st.title('Monthly Birth Statistics (2006 - Present)')
+st.title('Monthly Births (2006 - Present)')
 #st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 
@@ -21,7 +21,7 @@ st.title('Monthly Birth Statistics (2006 - Present)')
 
 @st.cache_data
 def load_data():
-    dataframe = pd.read_pickle('data/births/AllBirthsUpToJan2023.pkl')
+    dataframe = pd.read_pickle('data/births/AllBirthsUpToFeb2023.pkl')
     return dataframe
 
 
@@ -32,7 +32,7 @@ def convert_df(df):
     return df.to_csv().encode('utf-8')
 
 
-analysis_end_month_for_births = 1
+analysis_end_month_for_births = 2
 all_monthly_births_df = load_data()
 csv = convert_df(all_monthly_births_df)
 
