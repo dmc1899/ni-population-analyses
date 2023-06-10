@@ -8,7 +8,7 @@ from plotly.subplots import make_subplots
 
 st.set_page_config(layout='wide')
 
-st.title('Weekly Death Statistics (2023 YTD)')
+st.title('Weekly Deaths (2023 YTD)')
 st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 
