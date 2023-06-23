@@ -14,7 +14,7 @@ st.caption('👈 Use the sidebar to configure parameters for your analysis.')
 
 @st.cache_data
 def load_data():
-    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week22.pkl')
+    dataframe = pd.read_pickle('data/deaths/AllDeathsUpTo2023Week24.pkl')
     return dataframe
 
 
@@ -57,14 +57,14 @@ label_five_year_average_2018_to_2022 = '2018 - 2022'
 label_five_year_average_2016_to_2019_and_2021 = '2016 - 2019 and 2021'
 
 # Default UI settings
-analysis_end_week_selected = 21
+analysis_end_week_selected = 23
 mean_value_selected = label_five_year_average_2015_to_2019
 
 with st.sidebar:
 
     st.markdown("### Configure week and average")
 
-    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=22, step=1, value=22,
+    analysis_end_week_selected = st.number_input('2023 Registration Week:', min_value=1, max_value=24, step=1, value=24,
                                                  help='The week in the current year up to which points are plotted.')
 
     mean_value_selected = st.radio(
