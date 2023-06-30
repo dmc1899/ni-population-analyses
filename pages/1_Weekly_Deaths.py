@@ -21,7 +21,7 @@ def load_data():
     Load the input data from the local filesystem.
     :return: Pandas dataframe
     """
-    dataframe = pd.read_pickle("data/deaths/AllDeathsUpTo2023Week24.pkl")
+    dataframe = pd.read_pickle("data/deaths/AllDeathsUpTo2023Week25.pkl")
     return dataframe
 
 
@@ -108,9 +108,9 @@ def main():
         analysis_end_week_selected = st.number_input(
             "2023 Registration Week:",
             min_value=1,
-            max_value=24,
+            max_value=25,
             step=1,
-            value=24,
+            value=25,
             help="The registration week in the current year to analyse.",
         )
 
@@ -327,13 +327,19 @@ def main():
 
         axs.grid(linestyle="--", linewidth=0.25, color=".5", zorder=-10)
 
-        axs.plot(x_plot_point, y1_plot_point, color="red", lw=0.5, label=mean_value_selected, linestyle="--")
-        axs.plot(x_plot_point, y2_plot_point, color="dimgrey", lw=0.5, label=f"{comparison_year}")
+        axs.plot(x_plot_point, y1_plot_point, color="red",
+                 lw=0.5, label=mean_value_selected, linestyle="--")
+        axs.plot(x_plot_point, y2_plot_point,
+                 color="dimgrey", lw=0.5, label=f"{comparison_year}")
 
         axs.fill_between(
-            x_plot_point, y1_plot_point, y2_plot_point, where=y2_plot_point >= y1_plot_point, facecolor="lightcoral", interpolate=True
+            x_plot_point, y1_plot_point, y2_plot_point,
+            where=y2_plot_point >= y1_plot_point,
+            facecolor="lightcoral", interpolate=True
         )
-        axs.fill_between(x_plot_point, y1_plot_point, y2_plot_point, where=y2_plot_point <= y1_plot_point, facecolor="palegreen", interpolate=True)
+        axs.fill_between(x_plot_point, y1_plot_point, y2_plot_point,
+                         where=y2_plot_point <= y1_plot_point,
+                         facecolor="palegreen", interpolate=True)
 
         axs.set_xlabel("Registration Week", fontsize=9)
         axs.set_ylabel("Deaths", fontsize=9)
