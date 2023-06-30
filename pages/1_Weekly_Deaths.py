@@ -91,6 +91,7 @@ label_key_mapping = {
     LABEL_FIVE_YEAR_AVERAGE_2016_TO_2019_AND_2021: "2016_to_2019_and_2021_Mean",
 }
 
+
 def main():
     """
     Driver.
@@ -359,8 +360,9 @@ def main():
         st.write(all_weekly_deaths_df)
 
     st.markdown("---")
+    st.caption('Data published up to and including 16th June 2023.')
     st.caption(
-        "Weekly death statistics dataset sourced from [NISRA Weekly death registrations in "
+        "Data sourced from [NISRA Weekly death registrations in "
         "Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/"
         "weekly-death-registrations-northern-ireland)."
     )
