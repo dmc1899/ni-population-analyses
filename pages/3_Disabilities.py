@@ -37,13 +37,7 @@ def main():
     Driver.
     :return: None
     """
-    st.title("Personal Independence Payment Claims (2016 - Present)")
-
-    st.markdown(
-        """
-    ## New Personal Independence Payment Claims
-    """
-    )
+    st.title("NI Personal Independence Payment Claims")
 
     disability_claims_df = load_data()
     csv = convert_df(disability_claims_df)
@@ -124,11 +118,11 @@ def main():
         st.write(disability_claims_df)
 
     st.markdown("---")
+    st.caption("Data published up to and including November 2022.")
     st.caption(
         """
     Data sourced from [Department for Communities Personal Independence 
-    Payment Statistics](https://www.communities-ni.gov.uk/articles
-    /personal-independence-payment-statistics).
+    Payment Statistics](https://www.communities-ni.gov.uk/articles/personal-independence-payment-statistics).
     """
     )
 

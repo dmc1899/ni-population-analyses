@@ -7,8 +7,6 @@ import plotly.express as px
 
 st.set_page_config(layout="wide")
 
-st.title("Monthly Births (2006 - Present)")
-
 
 @st.cache_data
 def load_data():
@@ -24,16 +22,18 @@ def load_data():
 def convert_df(input_df):
     """
     Conver the specified dataframe to CSV.
-    :param input_df: Datframe to convert.
+    :param input_df: Dataframe to convert.
     :return: CSV
     """
     return input_df.to_csv().encode("utf-8")
+
 
 def main():
     """
     Driver.
     :return:
     """
+    st.title("NI Monthly Births")
     all_monthly_births_df = load_data()
     csv = convert_df(all_monthly_births_df)
 
@@ -76,9 +76,8 @@ def main():
         all_monthly_births_df,
         x="Month_of_Birth",
         y=range_2006_to_2023,
-        title="NI Total Monthly Births 2006-2023",
+        title="NI Total Monthly Births by Month of Birth 2006-2023",
         barmode="group",
-        #             facet_col='Month_of_Birth',
         height=600,
     )
 

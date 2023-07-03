@@ -97,7 +97,7 @@ def main():
     Driver.
     :return:
     """
-    st.title("Weekly Death Registrations")
+    st.title("NI Weekly Deaths")
     st.caption("👈 Use the sidebar to configure parameters for your analysis.")
 
     all_weekly_deaths_df = load_data()
@@ -141,7 +141,6 @@ def main():
             mime="text/csv",
             help="Download the raw data as a CSV file.",
         )
-
 
     mean_value_to_plot = label_key_mapping.get(mean_value_selected, "2015_to_2019_Mean")
     mean_value_selected = mean_value_selected + " 5yr average"
