@@ -146,7 +146,7 @@ def main():
 
     axes.text(
         "January 2022",
-        3.7,
+        0.7,
         "Injections first offered to women of "
         "child-bearing age 9 months before this date",
         ha="right",
