@@ -10,7 +10,7 @@ from matplotlib.ticker import MaxNLocator
 
 st.set_page_config(layout="wide")
 
-LATEST_MONTHLY_DATAPOINT_POSITION = 39  # March 2023 = 39
+LATEST_MONTHLY_DATAPOINT_POSITION = 41  # March 2023 = 39
 
 
 @st.cache_data
@@ -41,7 +41,7 @@ def main():
     st.title("NI Monthly Births")
 
     monthly_delta_births_df = load_data(
-        "data/births/MeanBirthDifference2020to20203April.pkl"
+        "data/births/MeanBirthDifference2020to20203_5.pkl"
     )[0:LATEST_MONTHLY_DATAPOINT_POSITION]
 
     # Create the figure and axes objects, specify the size and the dots per inches
@@ -160,7 +160,7 @@ def main():
     st.pyplot(fig)
     st.markdown("---")
 
-    all_monthly_births_df = load_data("data/births/AllBirthsUpToMonth32023.pkl")
+    all_monthly_births_df = load_data("data/births/AllBirthsUpToMonth52023.pkl")
     csv = convert_df(all_monthly_births_df)
 
     range_2006_to_2023 = [
@@ -219,7 +219,7 @@ def main():
         st.write(all_monthly_births_df)
 
     st.markdown("---")
-    st.caption("Data published up to and including March 2023.")
+    st.caption("Data published up to and including May 2023.")
     st.caption(
         "Data sourced from "
         "[NISRA Monthly Births Registered in Northern Ireland]"
