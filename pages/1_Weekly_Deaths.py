@@ -21,7 +21,7 @@ def load_data():
     Load the input data from the local filesystem.
     :return: Pandas dataframe
     """
-    dataframe = pd.read_pickle("data/deaths/AllDeathsUpTo2023Week25.pkl")
+    dataframe = pd.read_pickle("data/deaths/AllDeathsUpTo2023Week34.pkl")
     return dataframe
 
 
@@ -109,9 +109,9 @@ def main():
         analysis_end_week_selected = st.number_input(
             "2023 Registration Week:",
             min_value=1,
-            max_value=25,
+            max_value=34,
             step=1,
-            value=25,
+            value=34,
             help="The registration week in the current year to analyse.",
         )
 
@@ -303,18 +303,20 @@ def main():
 
         x_plot_point = (
             all_weekly_deaths_df_copy["Registration_Week"].loc[
-                0 : (analysis_end_week_selected - 1)
+                0: (analysis_end_week_selected - 1)
             ]
             if comparison_year == "2023"
             else all_weekly_deaths_df_copy["Registration_Week"]
         )
+
         y1_plot_point = (
             all_weekly_deaths_df_copy[mean_value_to_plot].loc[
-                0 : (analysis_end_week_selected - 1)
+                0: (analysis_end_week_selected - 1)
             ]
             if comparison_year == "2023"
             else all_weekly_deaths_df_copy[mean_value_to_plot]
         )
+
 
         y2_plot_point = (
             all_weekly_deaths_df_copy[f"{comparison_year}"].loc[0: (analysis_end_week_selected - 1)]
@@ -332,12 +334,13 @@ def main():
         axs.plot(x_plot_point, y2_plot_point,
                  color="dimgrey", lw=0.5, label=f"{comparison_year}")
 
+
         axs.fill_between(
-            x_plot_point, y1_plot_point, y2_plot_point,
+            x_plot_point.astype(int), y1_plot_point.astype(float), y2_plot_point.astype(int),
             where=y2_plot_point >= y1_plot_point,
             facecolor="lightcoral", interpolate=True
         )
-        axs.fill_between(x_plot_point, y1_plot_point, y2_plot_point,
+        axs.fill_between(x_plot_point.astype(int), y1_plot_point.astype(float), y2_plot_point.astype(int),
                          where=y2_plot_point <= y1_plot_point,
                          facecolor="palegreen", interpolate=True)
 
@@ -359,7 +362,7 @@ def main():
         st.write(all_weekly_deaths_df)
 
     st.markdown("---")
-    st.caption('Data published up to and including 16th June 2023.')
+    st.caption('Data published up to and including 25th August 2023.')
     st.caption(
         "Data sourced from [NISRA Weekly death registrations in "
         "Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/"
