@@ -324,25 +324,6 @@ def main():
             else all_weekly_deaths_df_copy[f"{comparison_year}"]
         )
 
-
-        import numpy as np
-
-
-        print(y1_plot_point)
-        print(np.isfinite(y1_plot_point))
-
-        print(y2_plot_point)
-        print(np.isfinite(y2_plot_point))
-
-        print(x_plot_point)
-        print(np.isfinite(x_plot_point))
-
-        print("")
-
-
-
-
-
         axs.set_xlim(1, 52)
         axs.set_ylim(200, 550)
 
