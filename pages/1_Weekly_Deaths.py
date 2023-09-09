@@ -9,12 +9,32 @@ import streamlit as st
 from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
-from lib.function_utils import mutate_safely
 
 st.set_page_config(layout="wide")
 
 with open("style.css", encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+def mutate_safely(function):
+    """
+    There are a limited number of pandas transformations that mutate the dataframe
+    in place.  These are limited to modifying a column of data (insert, delete or update);
+    assigning to the index or column attributes and modifying the values directly in the dataframe.
+
+    The purpose of this function is to perform the mutating functions idempotently by mutating
+    local deep copies of dataframes and returning new copies back to the caller.
+
+    We use Python decorators to adopt this pattern without polluting our core functions. We
+    decorate any function with @mutate_safely and write a function that mutates the given
+    dataframe directly without returning it.
+    """
+    def mutate(df, **params):
+        df = df.copy()
+        function(df, **params)
+        return df
+
+    return mutate
 
 
 @mutate_safely
