@@ -2,17 +2,41 @@
 Weekly deaths page.
 """
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
+from lib.function_utils import mutate_safely
 
 st.set_page_config(layout="wide")
 
 with open("style.css", encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+@mutate_safely
+def rename_index_with_labels(df, labels):
+    df.rename(index=labels, inplace=True)
+    return
+
+
+def subset_columns(df, columns):
+    return df[columns]
+
+
+def subset_rows(df, start, end):
+    return df[start:end]
+
+
+def style_dataframe(df, axis=1):
+    return df.style.background_gradient(axis=axis)
+
+
+def generate_sequence_labels(prefix, label_range):
+    return {i: f"{prefix} {i + 1}" for i in range(label_range)}
 
 
 @st.cache_data
@@ -76,6 +100,18 @@ def calculate_percentage_change(first_value, second_value):
         percentage = 0
     return percentage
 
+
+ALL_YEAR_COLUMNS = [
+    "2015",
+    "2016",
+    "2017",
+    "2018",
+    "2019",
+    "2020",
+    "2021",
+    "2022",
+    "2023",
+]
 
 LABEL_FIVE_YEAR_AVERAGE_2015_TO_2019 = "2015-2019"
 LABEL_FIVE_YEAR_AVERAGE_2016_TO_2020 = "2016-2020"
@@ -208,9 +244,11 @@ def main():
         percentage_change = metric_results[f"this_week_{comparison_year}_vs_2023"][2]
 
         col = None
-        help_text = f"There were {weekly_deaths} deaths registered " \
-                    f"during registration week {analysis_end_week_selected} " \
-                    f"of {comparison_year}."
+        help_text = (
+            f"There were {weekly_deaths} deaths registered "
+            f"during registration week {analysis_end_week_selected} "
+            f"of {comparison_year}."
+        )
 
         if comparison_year == f"{mean_value_to_plot}":
             col = col5
@@ -239,7 +277,9 @@ def main():
         fig_deaths_trends.add_trace(
             go.Scatter(
                 x=all_weekly_deaths_df["Registration_Week"],
-                y=all_weekly_deaths_df[comparison_year].loc[0: (analysis_end_week_selected - 1)]
+                y=all_weekly_deaths_df[comparison_year].loc[
+                    0 : (analysis_end_week_selected - 1)
+                ]
                 if comparison_year == "2023"
                 else all_weekly_deaths_df[comparison_year],
                 name=f"{comparison_year} Weekly Deaths",
@@ -251,33 +291,25 @@ def main():
 
     layout = go.Layout(
         height=600,
-        margin={
-            "l": 50,
-            "r": 50,
-            "b": 50,
-            "t": 50,
-            "pad": 4
-        },
+        margin={"l": 50, "r": 50, "b": 50, "t": 50, "pad": 4},
         title={
             "text": f"Weekly Deaths 2020-2023 (up to Week {analysis_end_week_selected}) "
-                    f"by Date of Registration versus {mean_value_selected}"
+            f"by Date of Registration versus {mean_value_selected}"
         },
         xaxis={
             "title_text": "Registration Week",
             "type": "category",
             "tickmode": "linear",
             "tick0": 1,
-            "dtick": 1
+            "dtick": 1,
         },
-        yaxis={
-            "title_text": "Deaths"
-        },
+        yaxis={"title_text": "Deaths"},
         legend={
             "orientation": "h",
             "yanchor": "bottom",
             "y": -0.4,
             "xanchor": "left",
-            "x": 0.01
+            "x": 0.01,
         },
     )
 
@@ -303,7 +335,7 @@ def main():
 
         x_plot_point = (
             all_weekly_deaths_df_copy["Registration_Week"].loc[
-                0: (analysis_end_week_selected - 1)
+                0 : (analysis_end_week_selected - 1)
             ]
             if comparison_year == "2023"
             else all_weekly_deaths_df_copy["Registration_Week"]
@@ -311,15 +343,16 @@ def main():
 
         y1_plot_point = (
             all_weekly_deaths_df_copy[mean_value_to_plot].loc[
-                0: (analysis_end_week_selected - 1)
+                0 : (analysis_end_week_selected - 1)
             ]
             if comparison_year == "2023"
             else all_weekly_deaths_df_copy[mean_value_to_plot]
         )
 
-
         y2_plot_point = (
-            all_weekly_deaths_df_copy[f"{comparison_year}"].loc[0: (analysis_end_week_selected - 1)]
+            all_weekly_deaths_df_copy[f"{comparison_year}"].loc[
+                0 : (analysis_end_week_selected - 1)
+            ]
             if comparison_year == "2023"
             else all_weekly_deaths_df_copy[f"{comparison_year}"]
         )
@@ -329,20 +362,38 @@ def main():
 
         axs.grid(linestyle="--", linewidth=0.25, color=".5", zorder=-10)
 
-        axs.plot(x_plot_point, y1_plot_point, color="red",
-                 lw=0.5, label=mean_value_selected, linestyle="--")
-        axs.plot(x_plot_point, y2_plot_point,
-                 color="dimgrey", lw=0.5, label=f"{comparison_year}")
-
+        axs.plot(
+            x_plot_point,
+            y1_plot_point,
+            color="red",
+            lw=0.5,
+            label=mean_value_selected,
+            linestyle="--",
+        )
+        axs.plot(
+            x_plot_point,
+            y2_plot_point,
+            color="dimgrey",
+            lw=0.5,
+            label=f"{comparison_year}",
+        )
 
         axs.fill_between(
-            x_plot_point.astype(int), y1_plot_point.astype(float), y2_plot_point.astype(int),
+            x_plot_point.astype(int),
+            y1_plot_point.astype(float),
+            y2_plot_point.astype(int),
             where=y2_plot_point >= y1_plot_point,
-            facecolor="lightcoral", interpolate=True
+            facecolor="lightcoral",
+            interpolate=True,
         )
-        axs.fill_between(x_plot_point.astype(int), y1_plot_point.astype(float), y2_plot_point.astype(int),
-                         where=y2_plot_point <= y1_plot_point,
-                         facecolor="palegreen", interpolate=True)
+        axs.fill_between(
+            x_plot_point.astype(int),
+            y1_plot_point.astype(float),
+            y2_plot_point.astype(int),
+            where=y2_plot_point <= y1_plot_point,
+            facecolor="palegreen",
+            interpolate=True,
+        )
 
         axs.set_xlabel("Registration Week", fontsize=9)
         axs.set_ylabel("Deaths", fontsize=9)
@@ -350,19 +401,40 @@ def main():
         axs.xaxis.set_major_locator(MultipleLocator(1))
 
         axs.tick_params(which="major", width=1.0, length=10, labelsize=8)
-        axs.tick_params(which="minor", width=1.0, length=5, labelsize=8, labelcolor="0.25")
+        axs.tick_params(
+            which="minor", width=1.0, length=5, labelsize=8, labelcolor="0.25"
+        )
 
         axs.legend(loc="upper right", fontsize=9)
 
     st.markdown("---")
     st.pyplot(fig)
 
+    st.markdown("---")
+    st.markdown(
+        f"#### Weekly Deaths Heatmap Comparison 2015 - 2023 (up to Week {analysis_end_week_selected})"
+    )
+
+    all_weekly_deaths_styled_df = (
+        all_weekly_deaths_df.fillna(np.NZERO)
+        .pipe(subset_columns, columns=ALL_YEAR_COLUMNS)
+        .pipe(subset_rows, start=0, end=(analysis_end_week_selected))
+        .pipe(rename_index_with_labels, labels=generate_sequence_labels("Week", 53))
+        .pipe(style_dataframe, axis=1)
+    )
+
+    st.dataframe(
+        all_weekly_deaths_styled_df,
+        use_container_width=True,
+        height=(36 * analysis_end_week_selected),
+    )  # 1228 is length for 34, 1190 is for 33 - 38 per week.
+
     if show_raw_data_selected:
         st.subheader("Raw data")
         st.write(all_weekly_deaths_df)
 
     st.markdown("---")
-    st.caption('Data published up to and including 25th August 2023.')
+    st.caption("Data published up to and including 25th August 2023.")
     st.caption(
         "Data sourced from [NISRA Weekly death registrations in "
         "Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/"
