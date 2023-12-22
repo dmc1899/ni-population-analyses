@@ -65,7 +65,7 @@ def load_data():
     Load the input data from the local filesystem.
     :return: Pandas dataframe
     """
-    dataframe = pd.read_pickle("data/deaths/AllDeathsUpTo2023Week49.pkl")
+    dataframe = pd.read_pickle("data/deaths/AllDeathsUpTo2023Week50.pkl")
     return dataframe
 
 
@@ -165,9 +165,9 @@ def main():
         analysis_end_week_selected = st.number_input(
             "2023 Registration Week:",
             min_value=1,
-            max_value=49,
+            max_value=50,
             step=1,
-            value=49,
+            value=50,
             help="The registration week in the current year to analyse.",
         )
 
@@ -454,7 +454,7 @@ def main():
         st.write(all_weekly_deaths_df)
 
     st.markdown("---")
-    st.caption("Data published up to and including 8th December 2023.")
+    st.caption("Data published up to and including 15th December 2023.")
     st.caption(
         "Data sourced from [NISRA Weekly death registrations in "
         "Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/"
