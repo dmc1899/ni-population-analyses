@@ -458,7 +458,7 @@ def main():
     st.caption(
         "Data sourced from [NISRA Weekly death registrations in "
         "Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/"
-        "weekly-death-registrations-northern-ireland)."
+        "weekly-death-registrations-northern-ireland). "
     )
 
 
