@@ -17,7 +17,7 @@ def load_data():
     :return: Pandas dataframe.
     """
     dataframe = pd.read_pickle(
-        "resources/data/disabilities/MonthlyDisabilityRegistrationsNov2022.pkl"
+        "web-ui/resources/data/disabilities/MonthlyDisabilityRegistrationsNov2022.pkl"
     )
     return dataframe
 
