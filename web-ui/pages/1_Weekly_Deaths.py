@@ -12,8 +12,8 @@ from matplotlib.ticker import MultipleLocator
 
 st.set_page_config(layout="wide")
 
-with open("style.css", encoding="utf-8") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+# with open("style.css", encoding="utf-8") as f:
+#     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 
 def mutate_safely(function):
@@ -65,7 +65,8 @@ def load_data():
     Load the input data from the local filesystem.
     :return: Pandas dataframe
     """
-    dataframe = pd.read_pickle("data/deaths/AllDeathsUpTo2023Week52.pkl")
+    #dataframe = pd.read_pickle("/Users/darraghmcconville/Library/CloudStorage/OneDrive-KainosSoftware/Personal/dev-zone/ni-population/new/ni-population-analyses/web-ui/resources/data/deaths/AllDeathsUpTo2024Week17.pkl")
+    dataframe = pd.read_pickle("resources/data/deaths/AllDeathsUpTo2024Week17.pkl")
     return dataframe
 
 
@@ -131,6 +132,7 @@ ALL_YEAR_COLUMNS = [
     "2021",
     "2022",
     "2023",
+    "2024",
 ]
 
 LABEL_FIVE_YEAR_AVERAGE_2015_TO_2019 = "2015-2019"
@@ -163,11 +165,11 @@ def main():
         st.markdown("### Configure week and average")
 
         analysis_end_week_selected = st.number_input(
-            "2023 Registration Week:",
+            "2024 Registration Week:",
             min_value=1,
-            max_value=52,
+            max_value=17,
             step=1,
-            value=52,
+            value=17,
             help="The registration week in the current year to analyse.",
         )
 
@@ -201,30 +203,30 @@ def main():
     mean_value_to_plot = label_key_mapping.get(mean_value_selected, "2015_to_2019_Mean")
     mean_value_selected = mean_value_selected + " 5yr average"
 
-    comparison_years = ["2022", "2021", "2020", mean_value_to_plot]
-    this_week_2023 = get_deaths_for(
-        all_weekly_deaths_df, analysis_end_week_selected, "2023"
+    comparison_years = ["2023", "2022", "2021", "2020", mean_value_to_plot]
+    active_week = get_deaths_for(
+        all_weekly_deaths_df, analysis_end_week_selected, "2024"
     )
 
     st.metric(
-        f"Week {analysis_end_week_selected} 2023",
-        f"{this_week_2023} Deaths",
+        f"Week {analysis_end_week_selected} 2024",
+        f"{active_week} Deaths",
         "",
         delta_color="inverse",
-        help=f"There were {this_week_2023} deaths registered "
-        f"during registration week {analysis_end_week_selected} of 2023.",
+        help=f"There were {active_week} deaths registered "
+        f"during registration week {analysis_end_week_selected} of 2024.",
     )
 
     st.markdown("---")
     st.markdown("#### Prior Year Comparisons")
-    col2, col3, col4, col5 = st.columns(4)
+    col2, col3, col4, col5, col6 = st.columns(5)
 
     metric_results = {}
     for comparison_year in comparison_years:
         weekly_deaths = get_deaths_for(
             all_weekly_deaths_df, analysis_end_week_selected, comparison_year
         )
-        percentage_change = calculate_percentage_change(weekly_deaths, this_week_2023)
+        percentage_change = calculate_percentage_change(weekly_deaths, active_week)
         percentage_change_abs = abs(percentage_change)
         comparison_outcome = is_higher_or_lower(percentage_change)
 
@@ -244,24 +246,24 @@ def main():
 
         metric_summary_text = (
             f":{display_colour}[Week {analysis_end_week_selected} is "
-            f"{percentage_change_abs}% {comparison_outcome} in 2023 than "
+            f"{percentage_change_abs}% {comparison_outcome} in 2024 than "
             f"in {formatted_year}.]"
         )
 
-        metric_results[f"this_week_{comparison_year}_vs_2023"] = (
+        metric_results[f"this_week_{comparison_year}_vs_2024"] = (
             metric_title,
             weekly_deaths,
             percentage_change,
             metric_summary_text,
         )
 
-    comparison_years = ["2022", "2021", "2020", f"{mean_value_to_plot}"]
+    comparison_years = ["2023", "2022", "2021", "2020", f"{mean_value_to_plot}"]
 
     for comparison_year in comparison_years:
-        computed_key_value = f"this_week_{comparison_year}_vs_2023"
-        metric_title = metric_results[f"this_week_{comparison_year}_vs_2023"][0]
-        weekly_deaths = metric_results[f"this_week_{comparison_year}_vs_2023"][1]
-        percentage_change = metric_results[f"this_week_{comparison_year}_vs_2023"][2]
+        computed_key_value = f"this_week_{comparison_year}_vs_2024"
+        metric_title = metric_results[f"this_week_{comparison_year}_vs_2024"][0]
+        weekly_deaths = metric_results[f"this_week_{comparison_year}_vs_2024"][1]
+        percentage_change = metric_results[f"this_week_{comparison_year}_vs_2024"][2]
 
         col = None
         help_text = (
@@ -271,14 +273,16 @@ def main():
         )
 
         if comparison_year == f"{mean_value_to_plot}":
-            col = col5
-            average_comparison_key = f"this_week_{mean_value_to_plot}_vs_2023"
-        elif comparison_year == "2022":
+            col = col6
+            average_comparison_key = f"this_week_{mean_value_to_plot}_vs_2024"
+        elif comparison_year == "2023":
             col = col2
-        elif comparison_year == "2021":
+        elif comparison_year == "2022":
             col = col3
-        elif comparison_year == "2020":
+        elif comparison_year == "2021":
             col = col4
+        elif comparison_year == "2020":
+            col = col5
 
         col.metric(
             metric_title,
@@ -289,7 +293,7 @@ def main():
         )
         col.markdown(metric_results[f"{computed_key_value}"][3])
 
-    plot_years = [mean_value_to_plot, "2020", "2021", "2022", "2023"]
+    plot_years = [mean_value_to_plot, "2020", "2021", "2022", "2023", "2024"]
 
     fig_deaths_trends = make_subplots(specs=[[{"secondary_y": False}]])
 
@@ -343,9 +347,9 @@ def main():
 
     fig, axs = plt.subplots(1, 1, constrained_layout=True, figsize=(10, 4))
 
-    for comparison_year in ["2023"]:
+    for comparison_year in ["2024"]:
         axs.set_title(
-            f"Weekly Deaths 2023 (up to Week {analysis_end_week_selected}) by "
+            f"Weekly Deaths 2024 (up to Week {analysis_end_week_selected}) by "
             f"Date of Registration versus {mean_value_selected}",
             fontsize=10,
             verticalalignment="top",
@@ -357,7 +361,7 @@ def main():
             all_weekly_deaths_df_copy["Registration_Week"].loc[
                 0 : (analysis_end_week_selected - 1)
             ]
-            if comparison_year == "2023"
+            if comparison_year == "2024"
             else all_weekly_deaths_df_copy["Registration_Week"]
         )
 
@@ -365,7 +369,7 @@ def main():
             all_weekly_deaths_df_copy[mean_value_to_plot].loc[
                 0 : (analysis_end_week_selected - 1)
             ]
-            if comparison_year == "2023"
+            if comparison_year == "2024"
             else all_weekly_deaths_df_copy[mean_value_to_plot]
         )
 
@@ -373,7 +377,7 @@ def main():
             all_weekly_deaths_df_copy[f"{comparison_year}"].loc[
                 0 : (analysis_end_week_selected - 1)
             ]
-            if comparison_year == "2023"
+            if comparison_year == "2024"
             else all_weekly_deaths_df_copy[f"{comparison_year}"]
         )
 
@@ -432,7 +436,7 @@ def main():
 
     st.markdown("---")
     st.markdown(
-        f"#### Weekly Deaths Heatmap Comparison 2015 - 2023 (up to Week {analysis_end_week_selected})"
+        f"#### Weekly Deaths Heatmap Comparison 2015 - 2024 (up to Week {analysis_end_week_selected})"
     )
 
     all_weekly_deaths_styled_df = (
@@ -446,7 +450,7 @@ def main():
     st.dataframe(
         all_weekly_deaths_styled_df,
         use_container_width=False,
-        height=(36 * analysis_end_week_selected),
+        height=(38 * analysis_end_week_selected),
     )  # 1228 is length for 34, 1190 is for 33 - 38 per week.
 
     if show_raw_data_selected:
@@ -454,7 +458,7 @@ def main():
         st.write(all_weekly_deaths_df)
 
     st.markdown("---")
-    st.caption("Data published up to and including 29th December 2023.")
+    st.caption("Data published up to and including 26th April 2024.")
     st.caption(
         "Data sourced from [NISRA Weekly death registrations in "
         "Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/"
@@ -463,4 +467,6 @@ def main():
 
 
 if __name__ == "__main__":
+    # dataframe = pd.read_pickle("../resources/data/deaths/AllDeathsUpTo2024Week17.pkl")
+    # print(dataframe.columns)
     main()

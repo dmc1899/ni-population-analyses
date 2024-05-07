@@ -41,7 +41,7 @@ def main():
     tab1, tab2 = st.tabs(["Deaths", "Disabilities"])
 
     with tab1:
-        all_deaths_and_injections_df = load_data("data/AllDeathsInjections.pkl")
+        all_deaths_and_injections_df = load_data("resources/data/AllDeathsInjections.pkl")
         csv = convert_df(all_deaths_and_injections_df)
 
         label_five_year_average_2015_to_2019 = "2015 - 2019"
@@ -326,7 +326,7 @@ def main():
 
     with tab2:
         df_pip_and_injections = load_data(
-            "data/MonthlyDisabilityRegistrationsAndInjectionsNov2022.pkl"
+            "resources/data/MonthlyDisabilityRegistrationsAndInjectionsNov2022.pkl"
         )
         csv = convert_df(df_pip_and_injections)
 
