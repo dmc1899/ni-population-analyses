@@ -32,7 +32,7 @@ def main():
     """
     )
 
-    st.image("img/bonhoeffer.jpg", use_column_width=True)
+    st.image("resources/img/bonhoeffer.jpg", use_column_width=True)
     st.caption(
         "[Image credit](https://www.insightforliving.ca/read/articles/dietrich-bonhoeffer)"
     )
