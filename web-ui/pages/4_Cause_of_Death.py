@@ -16,7 +16,7 @@ def main():
 
     @st.cache_data
     def load_data():
-        dataframe = pd.read_pickle("resources/data/deaths/DeathsByCauseUpToQ42022.pkl")
+        dataframe = pd.read_pickle("web-ui/resources/data/deaths/DeathsByCauseUpToQ42022.pkl")
         return dataframe
 
     @st.cache_data

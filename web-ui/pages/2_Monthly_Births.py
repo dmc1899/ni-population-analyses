@@ -41,7 +41,7 @@ def main():
     st.title("NI Monthly Births")
 
     monthly_delta_births_df = load_data(
-        "resources/data/births/MeanBirthDifference2020to20203_8.pkl"
+        "web-ui/resources/data/births/MeanBirthDifference2020to20203_8.pkl"
     )[0:LATEST_MONTHLY_DATAPOINT_POSITION]
 
     # Create the figure and axes objects, specify the size and the dots per inches
@@ -160,7 +160,7 @@ def main():
     st.pyplot(fig)
     st.markdown("---")
 
-    all_monthly_births_df = load_data("resources/data/births/AllBirthsUpToMonth82023.pkl")
+    all_monthly_births_df = load_data("web-ui/resources/data/births/AllBirthsUpToMonth82023.pkl")
     csv = convert_df(all_monthly_births_df)
 
     range_2006_to_2023 = [

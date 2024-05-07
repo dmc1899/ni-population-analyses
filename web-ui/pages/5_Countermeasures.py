@@ -55,7 +55,7 @@ def main():
     :return:
     """
     st.title("NI Countermeasures")
-    injections_cumulative_df = load_data("resources/data/injections/CumulativeInjectionsUpTo2Dec2023.pkl")
+    injections_cumulative_df = load_data("web-ui/resources/data/injections/CumulativeInjectionsUpTo2Dec2023.pkl")
 
     with st.sidebar:
         st.markdown("### Access underlying data")
@@ -138,7 +138,7 @@ def main():
         )
 
         trials_deaths_total = load_data(
-            "resources/data/injections/pfizer-biontech/CombinedClinicalTrialDeathsTotalOnly.pkl"
+            "web-ui/resources/data/injections/pfizer-biontech/CombinedClinicalTrialDeathsTotalOnly.pkl"
         )
         fig2 = go.Figure()
 
@@ -175,7 +175,7 @@ def main():
         st.plotly_chart(fig2, use_container_width=True, theme=None)
 
         trials_deaths_breakdown = load_data(
-            "resources/data/injections/pfizer-biontech/CombinedClinicalTrialDeathsBreakdown.pkl"
+            "web-ui/resources/data/injections/pfizer-biontech/CombinedClinicalTrialDeathsBreakdown.pkl"
         )
 
         arms = ["BNT162b2", "Placebo"]
@@ -215,7 +215,7 @@ def main():
 
         st.markdown("#### Trial Report")
         display_pdf(
-            "resources/doc/injection/pfizer-biontech/six-month-safety-efficacy-pfizer-mrna.pdf"
+            "web-ui/resources/doc/injection/pfizer-biontech/six-month-safety-efficacy-pfizer-mrna.pdf"
         )
         st.markdown(
             """
@@ -224,7 +224,7 @@ def main():
         """
         )
         display_pdf(
-            "resources/doc/injection/pfizer-biontech/appendices-to-pfizer-mrna-clinical-trial-document.pdf"
+            "web-ui/resources/doc/injection/pfizer-biontech/appendices-to-pfizer-mrna-clinical-trial-document.pdf"
         )
 
         if show_raw_data_selected:
@@ -257,7 +257,7 @@ def main():
             "differences in mechanism.* "
             "[Ref](https://www.sec.gov/Archives/edgar/data/1682852/000168285220000017/mrna-20200630.htm)"
         )
-        display_pdf("resources/doc/injection/moderna/mrna-20200630.pdf")
+        display_pdf("web-ui/resources/doc/injection/moderna/mrna-20200630.pdf")
 
         st.markdown(
             """
@@ -265,7 +265,7 @@ def main():
         """
         )
 
-        display_pdf("resources/doc/injection/pfizer-biontech/biontech-sec-submission-nov-2020.pdf")
+        display_pdf("web-ui/resources/doc/injection/pfizer-biontech/biontech-sec-submission-nov-2020.pdf")
 
 
 if __name__ == "__main__":
