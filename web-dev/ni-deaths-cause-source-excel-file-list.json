@@ -1,0 +1,1522 @@
+{
+  "2022-Q4": {
+    "description": "Quarter 4 2022 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2022Q4%20Final.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2022_q2_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 30,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Less than 1 year old",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14 \nyear olds",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34 year olds",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44 \nyear olds",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54\nyear olds",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64\nyear olds",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74\nyear olds",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79\nyear olds",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84\nyear olds",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89\nyear olds",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90 years\nand over",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2022-Q3": {
+    "description": "Quarter 3 2022 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2022Q3%20Final.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2022_q2_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 30,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Less than 1 year old",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14 \nyear olds",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34 year olds",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44 \nyear olds",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54\nyear olds",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64\nyear olds",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74\nyear olds",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79\nyear olds",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84\nyear olds",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89\nyear olds",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90 years\nand over",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2022-Q2": {
+    "description": "Quarter 2 2022 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2022Q2%20Final.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2022_q2_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 30,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Less than 1 year old",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14 \nyear olds",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34 year olds",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44 \nyear olds",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54\nyear olds",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64\nyear olds",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74\nyear olds",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79\nyear olds",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84\nyear olds",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89\nyear olds",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90 years\nand over",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2022-Q1": {
+    "description": "Quarter 1 2022 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2022Q1%20Final%20-%20with%20revised%202015-2020%20deaths%20and%202021%20population.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2022_q1_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 30,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Less than 1 year old",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14 \nyear olds",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34 year olds",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44 \nyear olds",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54\nyear olds",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64\nyear olds",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74\nyear olds",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79\nyear olds",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84\nyear olds",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89\nyear olds",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90 years\nand over",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2021-Q4": {
+    "description": "Quarter 4 2021 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2021Q4%20Final.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2021_q4_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 30,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Less than 1 year old",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14 \nyear olds",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34 year olds",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44 \nyear olds",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54\nyear olds",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64\nyear olds",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74\nyear olds",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79\nyear olds",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84\nyear olds",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89\nyear olds",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90 years\nand over",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2021-Q3": {
+    "description": "Quarter 3 2021 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2021Q3%20Final.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2021_q3_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 30,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Less than 1 year old",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14 \nyear olds",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34 year olds",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44 \nyear olds",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54\nyear olds",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64\nyear olds",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74\nyear olds",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79\nyear olds",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84\nyear olds",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89\nyear olds",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90 years\nand over",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2021-Q2": {
+    "description": "Quarter 2 2021 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2021Q2%20Final.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2021_q2_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 30,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Less than 1 year old",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14 \nyear olds",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34 year olds",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44 \nyear olds",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54\nyear olds",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64\nyear olds",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74\nyear olds",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79\nyear olds",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84\nyear olds",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89\nyear olds",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90 years\nand over",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2021-Q1": {
+    "description": "Quarter 1 2021 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2021Q1%20Final.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2021_q1_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 30,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Less than 1 year old",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14 \nyear olds",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34 year olds",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44 \nyear olds",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54\nyear olds",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64\nyear olds",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74\nyear olds",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79\nyear olds",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84\nyear olds",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89\nyear olds",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90 years\nand over",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2020-Q4": {
+    "description": "Quarter 4 2020 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2020Q4%20Final.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2020_q4_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 1,
+    "num_rows_to_read": 25,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Less than 1 year old",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14 year olds",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34 year olds",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44 year olds",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54 year olds",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64 year olds",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74 year olds",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79 year olds",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84 year olds",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89 year olds",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90 years and over",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2020-Q3": {
+    "description": "Quarter 3 2020 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2020Q3_revised.xls",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2020_q3_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 2,
+    "num_rows_to_read": 25,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Age\n0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2020-Q2": {
+    "description": "Quarter 2 2020 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2020Q2_Revised.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2020_q2_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 2,
+    "num_rows_to_read": 25,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Age\n0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2020-Q1": {
+    "description": "Quarter 1 2020 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/system/files/statistics/Tables_2020Q1_Revised.xlsx",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2020_q1_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 2,
+    "num_rows_to_read": 25,
+    "column_range_to_read": "A:P",
+    "column_name_mapping": [
+      {
+        "source_column_name": "ICD10 Code",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Cause of Death",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Age\n0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "Age\n90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2019-Q4": {
+    "description": "Quarter 4 2019 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/Tables_2019Q4_Revised.xls",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2019_q4_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 22,
+    "column_range_to_read": "A:O",
+    "column_name_mapping": [
+      {
+        "source_column_name": "Unnamed: 0",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Unnamed: 1",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2019-Q3": {
+    "description": "Quarter 3 2019 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/Tables_2019Q3.xls",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2019_q3_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 22,
+    "column_range_to_read": "A:O",
+    "column_name_mapping": [
+      {
+        "source_column_name": "Unnamed: 0",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Unnamed: 1",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2019-Q2": {
+    "description": "Quarter 2 2019 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/Tables_2019Q2.xls",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2019_q2_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 22,
+    "column_range_to_read": "A:O",
+    "column_name_mapping": [
+      {
+        "source_column_name": "Unnamed: 0",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Unnamed: 1",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2019-Q1": {
+    "description": "Quarter 1 2019 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/Tables_2019Q1.xls",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2019_q1_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 22,
+    "column_range_to_read": "A:O",
+    "column_name_mapping": [
+      {
+        "source_column_name": "Unnamed: 0",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Unnamed: 1",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2018-Q4": {
+    "description": "Quarter 4 2018 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/Tables_2018Q4_1.xls",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2018_q4_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 22,
+    "column_range_to_read": "A:O",
+    "column_name_mapping": [
+      {
+        "source_column_name": "Unnamed: 0",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Unnamed: 1",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2018-Q3": {
+    "description": "Quarter 3 2018 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/Tables_2018Q3.xls",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2018_q3_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 22,
+    "column_range_to_read": "A:O",
+    "column_name_mapping": [
+      {
+        "source_column_name": "Unnamed: 0",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Unnamed: 1",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2018-Q2": {
+    "description": "Quarter 2 2018 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/Tables_2018Q2.xls",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2018_q2_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 22,
+    "column_range_to_read": "A:O",
+    "column_name_mapping": [
+      {
+        "source_column_name": "Unnamed: 0",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Unnamed: 1",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  },
+  "2018-Q1": {
+    "description": "Quarter 1 2018 Cause of Death",
+    "source_url": "https://www.nisra.gov.uk/sites/nisra.gov.uk/files/publications/Tables_2018Q1.xls",
+    "dest_filepath": "data/inbound/raw/nisra/deaths/quarterly/2018_q1_deaths.xlsx",
+    "worksheet_name": "Table 4a",
+    "num_rows_from_top_to_ignore": 3,
+    "num_rows_to_read": 22,
+    "column_range_to_read": "A:O",
+    "column_name_mapping": [
+      {
+        "source_column_name": "Unnamed: 0",
+        "target_column_name": "ICD10_Code",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "Unnamed: 1",
+        "target_column_name": "Cause_of_Death",
+        "target_column_type": "str"
+      },
+      {
+        "source_column_name": "0",
+        "target_column_name": "<1",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "1-14",
+        "target_column_name": "1-14",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "15-34",
+        "target_column_name": "15-34",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "35-44",
+        "target_column_name": "35-44",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "45-54",
+        "target_column_name": "45-54",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "55-64",
+        "target_column_name": "55-64",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "65-74",
+        "target_column_name": "65-74",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "75-79",
+        "target_column_name": "75-79",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "80-84",
+        "target_column_name": "80-84",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "85-89",
+        "target_column_name": "85-89",
+        "target_column_type": "int"
+      },
+      {
+        "source_column_name": "90+",
+        "target_column_name": ">90",
+        "target_column_type": "int"
+      }
+    ]
+  }
+}
