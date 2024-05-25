@@ -43,7 +43,7 @@ def main():
     st.title("NI Monthly Births")
     print(os.getcwd())
     monthly_delta_births_df = load_data(
-        "web-ui/resources/data/births/MeanBirthDifference2020to202004_2.pkl"
+        "web-ui/resources/data/births/MeanBirthDifference2020to20204_2.pkl"
         # "resources/data/births/MeanBirthDifference2020to20204_2.pkl"
     )[0:LATEST_MONTHLY_DATAPOINT_POSITION]
 
