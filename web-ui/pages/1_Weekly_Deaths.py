@@ -66,7 +66,7 @@ def load_data():
     :return: Pandas dataframe
     """
     #dataframe = pd.read_pickle("/Users/darraghmcconville/Library/CloudStorage/OneDrive-KainosSoftware/Personal/dev-zone/ni-population/new/ni-population-analyses/web-ui/resources/data/deaths/AllDeathsUpTo2024Week17.pkl")
-    dataframe = pd.read_pickle("web-ui/resources/data/deaths/AllDeathsUpTo2024Week17.pkl")
+    dataframe = pd.read_pickle("web-ui/resources/data/deaths/AllDeathsUpTo2024Week20.pkl")
     return dataframe
 
 
@@ -167,9 +167,9 @@ def main():
         analysis_end_week_selected = st.number_input(
             "2024 Registration Week:",
             min_value=1,
-            max_value=17,
+            max_value=20,
             step=1,
-            value=17,
+            value=20,
             help="The registration week in the current year to analyse.",
         )
 
@@ -458,7 +458,7 @@ def main():
         st.write(all_weekly_deaths_df)
 
     st.markdown("---")
-    st.caption("Data published up to and including 26th April 2024.")
+    st.caption("Data published up to and including 17th May 2024.")
     st.caption(
         "Data sourced from [NISRA Weekly death registrations in "
         "Northern Ireland](https://www.nisra.gov.uk/statistics/death-statistics/"
