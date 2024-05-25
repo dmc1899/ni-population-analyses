@@ -1,6 +1,8 @@
 """
 Monthly births page.
 """
+import os
+
 import pandas as pd
 import streamlit as st
 import plotly.express as px
@@ -10,7 +12,7 @@ from matplotlib.ticker import MaxNLocator
 
 st.set_page_config(layout="wide")
 
-LATEST_MONTHLY_DATAPOINT_POSITION = 44  # March 2023 = 39
+LATEST_MONTHLY_DATAPOINT_POSITION = 50  # March 2023 = 39
 
 
 @st.cache_data
@@ -39,9 +41,10 @@ def main():
     :return:
     """
     st.title("NI Monthly Births")
-
+    print(os.getcwd())
     monthly_delta_births_df = load_data(
-        "web-ui/resources/data/births/MeanBirthDifference2020to20203_8.pkl"
+        "web-ui/resources/data/births/MeanBirthDifference2020to202004_2.pkl"
+        # "resources/data/births/MeanBirthDifference2020to20204_2.pkl"
     )[0:LATEST_MONTHLY_DATAPOINT_POSITION]
 
     # Create the figure and axes objects, specify the size and the dots per inches
@@ -160,7 +163,7 @@ def main():
     st.pyplot(fig)
     st.markdown("---")
 
-    all_monthly_births_df = load_data("web-ui/resources/data/births/AllBirthsUpToMonth82023.pkl")
+    all_monthly_births_df = load_data("web-ui/resources/data/births/AllBirthsUpToMonth22024.pkl") #"web-ui/resources/data/births/AllBirthsUpToMonth22024.pkl"
     csv = convert_df(all_monthly_births_df)
 
     range_2006_to_2023 = [
@@ -182,6 +185,7 @@ def main():
         "2021",
         "2022",
         "2023",
+        "2024"
     ]
 
     with st.sidebar:
@@ -219,7 +223,7 @@ def main():
         st.write(all_monthly_births_df)
 
     st.markdown("---")
-    st.caption("Data published up to and including August 2023.")
+    st.caption("Data published up to and including February 2024.")
     st.caption(
         "Data sourced from "
         "[NISRA Monthly Births Registered in Northern Ireland]"
