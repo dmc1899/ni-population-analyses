@@ -55,7 +55,7 @@ def main():
     :return:
     """
     st.title("NI Countermeasures")
-    injections_cumulative_df = load_data("web-ui/resources/data/injections/CumulativeInjectionsUpTo2Dec2023.pkl")
+    injections_cumulative_df = load_data("web-ui/resources/data/injections/CumulativeInjectionsUpToApril2024.pkl")#"web-ui/resources/data/injections/CumulativeInjectionsUpToApril2024.pkl")
 
     with st.sidebar:
         st.markdown("### Access underlying data")
@@ -82,7 +82,7 @@ def main():
             "Spring 2022 Booster",
             "Autumn 2022 Booster",
             "Spring 2023 Booster",
-            "Autumn 2023 Booster"
+            "Sept 2023 - March 2024 Booster"
         ]
 
         for injection in injections:
@@ -98,7 +98,7 @@ def main():
         layout = go.Layout(
             height=600,
             margin={"l": 50, "r": 50, "b": 100, "t": 100, "pad": 4},
-            title={"text": 'Cumulative Injections Administered (December 2020 - December 2023)'},
+            title={"text": 'Cumulative Injections Administered (December 2020 - April 2024)'},
             xaxis={'title_text': 'Date of administration',
                    'type': 'category',
                    'tickmode': 'linear',
@@ -116,7 +116,7 @@ def main():
             st.write(injections_cumulative_df)
 
         st.markdown("---")
-        st.caption("Data published up to and including 2nd December 2023.")
+        st.caption("Data published up to and including 27th April 2024.")
         st.caption(
             """
         Data sourced from 
