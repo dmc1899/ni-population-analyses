@@ -66,7 +66,7 @@ def load_data():
     :return: Pandas dataframe
     """
     #dataframe = pd.read_pickle("/Users/darraghmcconville/Library/CloudStorage/OneDrive-KainosSoftware/Personal/dev-zone/ni-population/new/ni-population-analyses/web-ui/resources/data/deaths/AllDeathsUpTo2024Week17.pkl")
-    dataframe = pd.read_pickle("web-ui/resources/data/deaths/AllDeathsUpTo2024Week20.pkl")
+    dataframe = pd.read_pickle(f"{st.session_state['parent_resource_path']}resources/data/deaths/AllDeathsUpTo2024Week20.pkl")
     return dataframe
 
 

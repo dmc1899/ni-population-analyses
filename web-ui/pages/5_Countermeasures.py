@@ -55,7 +55,7 @@ def main():
     :return:
     """
     st.title("NI Countermeasures")
-    injections_cumulative_df = load_data("web-ui/resources/data/injections/CumulativeInjectionsUpToApril2024.pkl")#"web-ui/resources/data/injections/CumulativeInjectionsUpToApril2024.pkl")
+    injections_cumulative_df = load_data(f"{st.session_state['parent_resource_path']}resources/data/injections/CumulativeInjectionsUpToApril2024.pkl")#"web-ui/resources/data/injections/CumulativeInjectionsUpToApril2024.pkl")
 
     with st.sidebar:
         st.markdown("### Access underlying data")
@@ -138,7 +138,7 @@ def main():
         )
 
         trials_deaths_total = load_data(
-            "web-ui/resources/data/injections/pfizer-biontech/CombinedClinicalTrialDeathsTotalOnly.pkl"
+            f"{st.session_state['parent_resource_path']}resources/data/injections/pfizer-biontech/CombinedClinicalTrialDeathsTotalOnly.pkl"
         )
         fig2 = go.Figure()
 
@@ -175,7 +175,7 @@ def main():
         st.plotly_chart(fig2, use_container_width=True, theme=None)
 
         trials_deaths_breakdown = load_data(
-            "web-ui/resources/data/injections/pfizer-biontech/CombinedClinicalTrialDeathsBreakdown.pkl"
+            f"{st.session_state['parent_resource_path']}resources/data/injections/pfizer-biontech/CombinedClinicalTrialDeathsBreakdown.pkl"
         )
 
         arms = ["BNT162b2", "Placebo"]
