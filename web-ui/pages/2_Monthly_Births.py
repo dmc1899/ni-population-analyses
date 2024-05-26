@@ -43,7 +43,7 @@ def main():
     st.title("NI Monthly Births")
     print(os.getcwd())
     monthly_delta_births_df = load_data(
-        "web-ui/resources/data/births/MeanBirthDifference2020to20204_2.pkl"
+        f"{st.session_state['parent_resource_path']}resources/data/births/MeanBirthDifference2020to20204_2.pkl"
         # "resources/data/births/MeanBirthDifference2020to20204_2.pkl"
     )[0:LATEST_MONTHLY_DATAPOINT_POSITION]
 
@@ -163,7 +163,7 @@ def main():
     st.pyplot(fig)
     st.markdown("---")
 
-    all_monthly_births_df = load_data("web-ui/resources/data/births/AllBirthsUpToMonth22024.pkl") #"web-ui/resources/data/births/AllBirthsUpToMonth22024.pkl"
+    all_monthly_births_df = load_data(f"{st.session_state['parent_resource_path']}resources/data/births/AllBirthsUpToMonth22024.pkl") #"web-ui/resources/data/births/AllBirthsUpToMonth22024.pkl"
     csv = convert_df(all_monthly_births_df)
 
     range_2006_to_2023 = [
