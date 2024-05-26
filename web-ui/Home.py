@@ -44,8 +44,8 @@ def main():
     Driver.
     :return: None.
     """
-    _debug("Before assignment")
-    _initialize_session_state()
+    # _debug("Before assignment")
+    # _initialize_session_state()
 
     print(st.session_state['parent_resource_path'])
     st.markdown(
@@ -71,4 +71,5 @@ def main():
 
 
 if __name__ == "__main__":
+    _initialize_session_state()
     main()
