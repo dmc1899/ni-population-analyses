@@ -21,7 +21,7 @@ def _debug(msg: str):
 
 def _is_running_on_streamlit_cloud():
     # Streamlit Cloud sets the environment variable 'STREAMLIT_SERVER'
-    return os.getenv("STREAMLIT_SERVER") == "cloud"
+    return os.getenv('USER') == 'appuser'
 
 
 def _initialize_session_state() -> None:
