@@ -1,5 +1,6 @@
-import unittest
 import logging
+import unittest
+
 from util_lib import date_help
 
 logging.basicConfig(level=logging.INFO)

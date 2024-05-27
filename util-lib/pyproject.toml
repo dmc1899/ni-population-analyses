@@ -40,6 +40,9 @@ show_error_codes = "True"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+pandas = "^2.2.2"
+plotly = "^5.22.0"
+kaleido = "0.2.1"
 
 
 [build-system]
