@@ -125,60 +125,79 @@ local_ca_certificate_file_path='/opt/conda/lib/python3.10/site-packages/certifi/
 #     df[column] = df[column].replace(0, pd.NA).fillna(method='ffill')
 
 
-def convert_dtypes_obj_to_strings(df):
-    object_columns = list(df.select_dtypes(include='object').columns)
+# def convert_dtypes_obj_to_strings(df):
+#     object_columns = list(df.select_dtypes(include='object').columns)
+#
+#     for object_column in object_columns:
+#         df[object_column] = df[object_column].astype(str)
+#
+#     return df
 
-    for object_column in object_columns:
-        df[object_column] = df[object_column].astype(str)
-
-    return df
-
-
-
-def hello():
-    print("hello")
-
-
-def debug_this(debug_enabled, message, preview_only=True):
-    if debug_enabled:
-        if isinstance(message, pd.DataFrame):
-            if preview_only:
-                display(message.head())
-            else:
-                display(message)
-        else:
-            print(message)
+#
+#
+# def hello():
+#     print("hello")
 
 
-def print_full(x):
-    pd.set_option('display.max_rows', None)
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.width', 2000)
-    pd.set_option('display.float_format', '{:20,.2f}'.format)
-    pd.set_option('display.max_colwidth', None)
-    print(x)
-    pd.reset_option('display.max_rows')
-    pd.reset_option('display.max_columns')
-    pd.reset_option('display.width')
-    pd.reset_option('display.float_format')
-    pd.reset_option('display.max_colwidth')
+# def debug_this(debug_enabled, message, preview_only=True):
+#     if debug_enabled:
+#         if isinstance(message, pd.DataFrame):
+#             if preview_only:
+#                 display(message.head())
+#             else:
+#                 display(message)
+#         else:
+#             print(message)
 
 
-def download_file(from_path, to_path):
-    print("downloaded from: " + from_path)
+# def print_full(x):
+#     pd.set_option('display.max_rows', None)
+#     pd.set_option('display.max_columns', None)
+#     pd.set_option('display.width', 2000)
+#     pd.set_option('display.float_format', '{:20,.2f}'.format)
+#     pd.set_option('display.max_colwidth', None)
+#     print(x)
+#     pd.reset_option('display.max_rows')
+#     pd.reset_option('display.max_columns')
+#     pd.reset_option('display.width')
+#     pd.reset_option('display.float_format')
+#     pd.reset_option('display.max_colwidth')
 
-    response = requests.get(from_path, verify=local_ca_certificate_file_path)
 
-    with open(to_path, 'wb') as file:
-        file.write(response.content)
+# def download_file(from_path, to_path):
+#     print("downloaded from: " + from_path)
+#
+#     response = requests.get(from_path, verify=local_ca_certificate_file_path)
+#
+#     with open(to_path, 'wb') as file:
+#         file.write(response.content)
 
-
-def source_target_list_to_dict(list_items):
-    colummn_name_dict = {}
-    for source_target_item in list_items:
-        colummn_name_dict[source_target_item['source']] = source_target_item['target']
-
-    return colummn_name_dict
+#
+# def source_target_list_to_dict(list_items):
+#     """
+#     This function source_target_list_to_dict effectively maps the
+#     'source' values to the 'target' values from a list of dictionaries,
+#     where each dictionary has a 'source' and 'target' key.
+#     For example, given this input:
+#         list_items = [
+#             {'source': 'A', 'target': '1'},
+#             {'source': 'B', 'target': '2'},
+#             {'source': 'C', 'target': '3'}
+#             ]
+#         the function returns:
+#         {
+#             'A': '1',
+#             'B': '2',
+#             'C': '3'
+#         }
+#     :param list_items:
+#     :return:
+#     """
+#     colummn_name_dict = {}
+#     for source_target_item in list_items:
+#         colummn_name_dict[source_target_item['source']] = source_target_item['target']
+#
+#     return colummn_name_dict
 
 def get_json_content_from_file(file):
     with open(file, 'r') as file:
