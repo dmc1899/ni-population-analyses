@@ -6,6 +6,7 @@ import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from lib.page_utils import *
 
 st.set_page_config(layout="wide")
 
@@ -215,7 +216,7 @@ def main():
 
         st.markdown("#### Trial Report")
         display_pdf(
-            "web-ui/resources/doc/injection/pfizer-biontech/six-month-safety-efficacy-pfizer-mrna.pdf"
+            f"{st.session_state['parent_resource_path']}/resources/doc/injection/pfizer-biontech/six-month-safety-efficacy-pfizer-mrna.pdf"
         )
         st.markdown(
             """
@@ -224,7 +225,7 @@ def main():
         """
         )
         display_pdf(
-            "web-ui/resources/doc/injection/pfizer-biontech/appendices-to-pfizer-mrna-clinical-trial-document.pdf"
+            f"{st.session_state['parent_resource_path']}/resources/doc/injection/pfizer-biontech/appendices-to-pfizer-mrna-clinical-trial-document.pdf"
         )
 
         if show_raw_data_selected:
@@ -257,7 +258,7 @@ def main():
             "differences in mechanism.* "
             "[Ref](https://www.sec.gov/Archives/edgar/data/1682852/000168285220000017/mrna-20200630.htm)"
         )
-        display_pdf("web-ui/resources/doc/injection/moderna/mrna-20200630.pdf")
+        display_pdf(f"{st.session_state['parent_resource_path']}/resources/doc/injection/moderna/mrna-20200630.pdf")
 
         st.markdown(
             """
@@ -265,8 +266,9 @@ def main():
         """
         )
 
-        display_pdf("web-ui/resources/doc/injection/pfizer-biontech/biontech-sec-submission-nov-2020.pdf")
+        display_pdf(f"{st.session_state['parent_resource_path']}/resources/doc/injection/pfizer-biontech/biontech-sec-submission-nov-2020.pdf")
 
 
 if __name__ == "__main__":
+    initialize_session_state()
     main()

@@ -3,6 +3,7 @@ Landing page for application.
 """
 import os
 import streamlit as st
+from lib.page_utils import *
 
 st.set_page_config(
     page_title="Pandemic Period Data",
@@ -19,24 +20,7 @@ def _debug(msg: str):
     print("============================================================")
 
 
-def _is_running_on_streamlit_cloud():
-    # Streamlit Cloud sets the environment variable 'STREAMLIT_SERVER'
-    return os.getenv('USER') == 'appuser'
 
-
-def _initialize_session_state() -> None:
-    """
-    Given the multi-module repository we are using, the mount point
-    on Streamlit cloud for resources is different to that when run
-    locally. This function merely changes the local path prefix for
-    resources based on a check if the app is running on the cloud.
-    """
-    if _is_running_on_streamlit_cloud():
-        print("this was cloud")
-        st.session_state['parent_resource_path'] = 'web-ui/'
-    else:
-        print("not cloud")
-        st.session_state['parent_resource_path'] = './'
 
 
 def main():
@@ -71,5 +55,5 @@ def main():
 
 
 if __name__ == "__main__":
-    _initialize_session_state()
+    initialize_session_state()
     main()

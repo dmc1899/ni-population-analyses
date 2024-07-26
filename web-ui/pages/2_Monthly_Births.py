@@ -9,6 +9,7 @@ import plotly.express as px
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.ticker import MaxNLocator
+from lib.page_utils import *
 
 st.set_page_config(layout="wide")
 
@@ -232,4 +233,5 @@ def main():
 
 
 if __name__ == "__main__":
+    initialize_session_state()
     main()

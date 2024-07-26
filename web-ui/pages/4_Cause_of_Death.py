@@ -4,6 +4,7 @@ Cause of Death page.
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from lib.page_utils import *
 
 st.set_page_config(layout="wide")
 
@@ -117,4 +118,5 @@ def main():
 
 
 if __name__ == "__main__":
+    initialize_session_state()
     main()

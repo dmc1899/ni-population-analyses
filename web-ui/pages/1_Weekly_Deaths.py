@@ -9,6 +9,7 @@ import streamlit as st
 from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
+from lib.page_utils import *
 
 st.set_page_config(layout="wide")
 
@@ -467,6 +468,5 @@ def main():
 
 
 if __name__ == "__main__":
-    # dataframe = pd.read_pickle("../resources/data/deaths/AllDeathsUpTo2024Week17.pkl")
-    # print(dataframe.columns)
+    initialize_session_state()
     main()
