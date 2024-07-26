@@ -6,6 +6,7 @@ import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
+from lib.page_utils import *
 
 st.set_page_config(layout="wide")
 
@@ -128,4 +129,5 @@ def main():
 
 
 if __name__ == "__main__":
+    initialize_session_state()
     main()
