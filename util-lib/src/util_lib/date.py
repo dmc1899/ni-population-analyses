@@ -1,8 +1,20 @@
+"""
+ Convenience functions for date manipulation and validation.
+"""
+
 from datetime import datetime
 from enum import IntEnum
 
+import logging
+
+logger = logging.getLogger(__name__)
+
 
 class Month(IntEnum):
+    """
+    Enumeration of months of the year.
+    """
+
     JANUARY = 1
     FEBRUARY = 2
     MARCH = 3
@@ -31,9 +43,5 @@ def reformat_date(
     return datetime.strptime(input_date, source_format).strftime(target_format)
 
 
-def main() -> None:
-    print("running.")
-
-
 if __name__ == "__main__":
-    main()
+    print("main")

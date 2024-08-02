@@ -1,3 +1,7 @@
+"""
+This module contains tests for the date module.
+"""
+
 import logging
 import unittest
 

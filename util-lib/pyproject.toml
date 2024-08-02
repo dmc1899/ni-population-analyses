@@ -28,6 +28,13 @@ addopts = [
     "--import-mode=importlib",#See https://docs.pytest.org/en/7.2.x/explanation/goodpractices.html#choosing-a-test-layout-import-rules
 ]
 
+[tool.pylint]
+max-line-length = 120
+
+[tool.pylint.messages_control]
+disable = ["C0116", "unsubscriptable-object"]
+
+
 [tool.mypy]
 files = ["src","tests"]
 disallow_untyped_defs = "True"
@@ -38,6 +45,10 @@ warn_return_any = "True"
 warn_unused_ignores = "True"
 show_error_codes = "True"
 
+[[tool.mypy.overrides]]
+module = "plotly.*"
+ignore_missing_imports = true
+
 [tool.poetry.dependencies]
 python = "^3.10"
 pandas = "^2.2.2"
@@ -45,6 +56,8 @@ plotly = "^5.22.0"
 kaleido = "0.2.1"
 requests = "^2.32.2"
 jsonschema = "^4.22.0"
+openpyxl = "^3.1.5"
+pylint = "^3.2.6"
 
 
 [build-system]

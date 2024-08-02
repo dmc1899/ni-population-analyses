@@ -1,166 +1,175 @@
+"""
+This module contains unit tests for the file operations in the util_lib.file module.
+The tests cover various scenarios such as file existence, file hashing, file download,
+file validation against a schema, and file saving logic.
+"""
+
+import json
+from typing import Dict
+from unittest.mock import patch, mock_open, Mock
 import pytest
 
-from util_lib.file import download_file_safely, calculate_file_hash,get_json_content_from_file, validate_json_file_against_schema_file
-import unittest
-from unittest.mock import patch, mock_open, MagicMock
-from requests.exceptions import HTTPError, Timeout, RequestException
-import json
-import jsonschema
+from util_lib.error import InvalidFileError
+from util_lib.file import (
+    download_new_file,
+    get_json_content_from_file,
+    validate_json_file_against_schema_file,
+    _save_only_if_new,
+)
 
 
-@patch('builtins.print')
-@patch('os.makedirs')
-@patch('os.path.exists')
-@patch('os.rename')
-@patch('builtins.open', new_callable=mock_open)
-@patch('requests.get')
-@patch('util_lib.file.calculate_file_hash')
-def test_invalid_url(mock_calculate_file_hash, mock_get, mock_open, mock_rename, mock_exists, mock_makedirs, mock_print):
-    # with assert(ValueError): TODO - workout why this value error is not being raised.
-    download_file_safely('ftp://invalid_url', './file')
+@pytest.fixture
+def mock_file_operations() -> None:
+    with patch("util_lib.file._is_file_present") as mock_file_exists, patch(
+        "util_lib.file.calculate_file_hash"
+    ) as mock_calculate_file_hash, patch(
+        "util_lib.file._delete_file"
+    ) as mock_delete_file, patch(
+        "util_lib.file._rename_file"
+    ) as mock_rename_file:
+        yield mock_file_exists, mock_calculate_file_hash, mock_delete_file, mock_rename_file
 
 
-@patch('builtins.print')
-@patch('os.makedirs')
-@patch('os.path.exists')
-@patch('os.rename')
-@patch('builtins.open', new_callable=mock_open)
-@patch('requests.get')
-@patch('util_lib.file.calculate_file_hash')
-def test_successful_download(mock_calculate_file_hash, mock_get, mock_open, mock_rename, mock_exists, mock_makedirs, mock_print):
-    mock_get.return_value.content = b'file content'
-    mock_get.return_value.raise_for_status = MagicMock()
-    mock_calculate_file_hash.side_effect = ['hash1']
+def test_save_only_if_new_file_does_not_exist(mock_file_operations, capfd) -> None:
+    mock_file_exists, mock_calculate_file_hash, mock_delete_file, mock_rename_file = (
+        mock_file_operations
+    )
+    mock_file_exists.return_value = False
 
-    mock_exists.return_value = False
-
-    download_file_safely('http://valid_url', '/path/to/save/file')
-
-    mock_get.assert_called_once()
-    mock_open.assert_called_with('/path/to/save/file.tmp', 'wb')
-    mock_rename.assert_called_with('/path/to/save/file.tmp', '/path/to/save/file')
+    _save_only_if_new("hash", "algorithm", "temp_path", "to_path")
+    mock_rename_file.assert_called_once_with("temp_path", "to_path")
 
 
-@patch('builtins.print')
-@patch('os.makedirs')
-@patch('os.path.exists')
-@patch('os.rename')
-@patch('builtins.open', new_callable=mock_open)
-@patch('requests.get')
-@patch('util_lib.file.calculate_file_hash')
-def test_hash_comparison_identical(mock_calculate_file_hash, mock_get, mock_open, mock_rename, mock_exists, mock_makedirs, mock_print):
-    mock_get.return_value.content = b'file content'
-    mock_get.return_value.raise_for_status = MagicMock()
-    mock_calculate_file_hash.side_effect = ['hash1', 'hash1']
+def test_save_only_if_new_file_identical(mock_file_operations: Mock, capfd) -> None:
+    mock_file_exists, mock_calculate_file_hash, mock_delete_file, mock_rename_file = (
+        mock_file_operations
+    )
+    mock_file_exists.return_value = True
+    mock_calculate_file_hash.return_value = "hash"
 
-    mock_exists.return_value = True
+    _save_only_if_new("hash", "algorithm", "temp_path", "to_path")
 
-    download_file_safely('http://valid_url', '/path/to/save/file')
-
-    mock_get.assert_called_once()
-    mock_open.assert_called_with('/path/to/save/file.tmp', 'wb')
-    assert mock_rename.called is False
+    mock_delete_file.assert_called_once_with("temp_path")
+    mock_rename_file.assert_not_called()
 
 
-@patch('builtins.print')
-@patch('os.makedirs')
-@patch('os.path.exists')
-@patch('os.rename')
-@patch('builtins.open', new_callable=mock_open)
-@patch('requests.get')
-@patch('util_lib.file.calculate_file_hash')
-def test_hash_comparison_different(mock_calculate_file_hash, mock_get, mock_open, mock_rename, mock_exists, mock_makedirs, mock_print):
-    mock_get.return_value.content = b'file content'
-    mock_get.return_value.raise_for_status = MagicMock()
-    mock_calculate_file_hash.side_effect = ['hash1', 'hash2']
+@patch("util_lib.file._is_valid_url")
+@patch("util_lib.file._create_directory_if_not_exists")
+@patch("util_lib.file._save_temp_file")
+@patch("util_lib.file._download_file")
+@patch("util_lib.file.calculate_file_hash")
+@patch("util_lib.file._save_only_if_new")
+def test_download_new_file_success_new_file(
+    mock_save_only_if_new: Mock,
+    mock_calculate_file_hash: Mock,
+    mock_download_file: Mock,
+    mock_save_temp_file: Mock,
+    mock_create_directory_if_not_exists: Mock,
+    mock_is_valid_url: Mock,
+) -> None:
+    mock_is_valid_url.return_value = True
+    mock_download_file.return_value = b"file_content"
+    mock_calculate_file_hash.return_value = "hash"
+    mock_save_only_if_new.return_value = None
 
-    mock_exists.return_value = True
+    download_new_file("http://example.com/file.txt", "/path/to/file.txt")
 
-    download_file_safely('http://valid_url', '/path/to/save/file')
-
-    mock_get.assert_called_once()
-    mock_open.assert_called_with('/path/to/save/file.tmp', 'wb')
-    mock_rename.assert_called_with('/path/to/save/file.tmp', '/path/to/save/file')
-
-
-@patch('builtins.print')
-@patch('requests.get')
-def test_http_error(mock_get, mock_print):
-    mock_get.side_effect = HTTPError("HTTP Error")
-    download_file_safely('http://valid_url', './file')
-    mock_print.assert_any_call("HTTP error occurred: HTTP Error")
-
-
-@patch('builtins.print')
-@patch('requests.get')
-def test_timeout_error(mock_get, mock_print):
-    mock_get.side_effect = Timeout("Timeout Error")
-
-    download_file_safely('http://valid_url', './file')
-
-    mock_print.assert_any_call("Timeout error occurred: Timeout Error")
+    mock_create_directory_if_not_exists.assert_called_once_with("/path/to/file.txt")
+    mock_save_temp_file.assert_called_once_with(
+        "/path/to/file.txt.tmp", b"file_content"
+    )
+    mock_calculate_file_hash.assert_called_once_with("/path/to/file.txt.tmp", "sha256")
+    mock_save_only_if_new.assert_called_once_with(
+        "hash", "sha256", "/path/to/file.txt.tmp", "/path/to/file.txt"
+    )
 
 
-@patch('builtins.print')
-@patch('requests.get')
-def test_request_exception(mock_get, mock_print):
-    mock_get.side_effect = RequestException("Request Exception")
+@patch("util_lib.file._is_valid_url")
+@patch("util_lib.file._create_directory_if_not_exists")
+@patch("util_lib.file._save_temp_file")
+@patch("util_lib.file._download_file")
+@patch("util_lib.file.calculate_file_hash")
+@patch("util_lib.file._save_only_if_new")
+@patch("util_lib.file._is_file_present")
+def test_download_new_file_success_existing_file(
+    mock_file_exists: Mock,
+    mock_save_only_if_new: Mock,
+    mock_calculate_file_hash: Mock,
+    mock_download_file: Mock,
+    mock_save_temp_file: Mock,
+    mock_create_directory_if_not_exists: Mock,
+    mock_is_valid_url: Mock,
+) -> None:
+    mock_is_valid_url.return_value = True
+    mock_download_file.return_value = b"file_content"
+    mock_calculate_file_hash.return_value = "hash"
+    mock_save_only_if_new.return_value = None
+    mock_file_exists.return_value = True
 
-    download_file_safely('http://valid_url', './file')
+    download_new_file("http://example.com/file.txt", "/path/to/file.txt")
 
-    mock_print.assert_any_call("Request exception occurred: Request Exception")
-
-
-@patch('builtins.print')
-@patch('os.makedirs')
-@patch('os.path.exists')
-@patch('os.rename')
-@patch('builtins.open', new_callable=mock_open)
-@patch('requests.get')
-@patch('util_lib.file.calculate_file_hash')
-def test_io_error(mock_calculate_file_hash, mock_get, mock_open, mock_rename, mock_exists, mock_makedirs, mock_print):
-    mock_open.side_effect = IOError("IO Error")
-    download_file_safely('http://valid_url', '/path/to/save/file')
-    mock_print.assert_any_call("File I/O error occurred: IO Error")
+    mock_create_directory_if_not_exists.assert_called_once_with("/path/to/file.txt")
+    mock_save_temp_file.assert_called_once_with(
+        "/path/to/file.txt.tmp", b"file_content"
+    )
+    mock_calculate_file_hash.assert_called_once_with("/path/to/file.txt.tmp", "sha256")
+    mock_save_only_if_new.assert_called_once_with(
+        "hash", "sha256", "/path/to/file.txt.tmp", "/path/to/file.txt"
+    )
 
 
-@patch('builtins.open', new_callable=mock_open, read_data='{"key": "value"}')
-def test_valid_json(mock_file):
+def test_download_new_file_invalid_url() -> None:
+    with patch("util_lib.file._is_valid_url") as mock_is_valid_url:
+        mock_is_valid_url.return_value = False
+
+        with pytest.raises(InvalidFileError) as exc_info:
+            download_new_file("invalid_url", "to_path")
+
+        assert (
+            str(exc_info.value)
+            == "Invalid URL. The URL should start with 'http://' or 'https://'."
+        )
+
+
+@patch("builtins.open", new_callable=mock_open, read_data='{"key": "value"}')
+def test_valid_json_yet_again(mock_file: Mock) -> None:
     expected_output = {"key": "value"}
-    result = get_json_content_from_file('dummy_file.json')
+    result = get_json_content_from_file("dummy_file.json")
     assert result == expected_output
 
 
-@patch('builtins.open', new_callable=mock_open, read_data='{}')
-def test_empty_json(mock_file):
+@patch("builtins.open", new_callable=mock_open, read_data="{}")
+def test_empty_json(mock_file: Mock) -> None:
     expected_output = {}
-    result = get_json_content_from_file('dummy_file.json')
+    result = get_json_content_from_file("dummy_file.json")
     assert result == expected_output
 
 
-@patch('builtins.open', new_callable=mock_open, read_data='{invalid json}')
-def test_invalid_json(mock_file):
+@patch("builtins.open", new_callable=mock_open, read_data="{invalid json}")
+def test_invalid_json_again(mock_file: Mock) -> None:
     with pytest.raises(json.JSONDecodeError):
-        get_json_content_from_file('dummy_file.json')
+        get_json_content_from_file("dummy_file.json")
 
-@patch('builtins.open', side_effect=FileNotFoundError)
-def test_non_existent_file(mock_file):
+
+@patch("builtins.open", side_effect=FileNotFoundError)
+def test_non_existent_file(mock_file: Mock) -> None:
     with pytest.raises(FileNotFoundError):
-        get_json_content_from_file('dummy_file.json')
+        get_json_content_from_file("dummy_file.json")
 
 
-# Create a mock function that raises a JSONDecodeError
-def mock_get_json_content_from_file_raises_jsondecodeerror(file):
+def mock_get_json_content_from_file_raises_jsondecodeerror(file: str) -> None:
     raise json.JSONDecodeError("Expecting value", file, 0)
 
 
-@patch('util_lib.file.get_json_content_from_file', side_effect=mock_get_json_content_from_file_raises_jsondecodeerror)
-def test_json_decode_error(mock_get_json):
+@patch(
+    "util_lib.file.get_json_content_from_file",
+    side_effect=mock_get_json_content_from_file_raises_jsondecodeerror,
+)
+def test_json_decode_error(mock_get_json: Mock) -> None:
     with pytest.raises(json.JSONDecodeError):
         validate_json_file_against_schema_file("dummy_file.json", "dummy_schema.json")
 
 
-# Mock data for testing
 valid_json_content = {"name": "John", "age": 30}
 valid_json_schema = {
     "type": "object",
@@ -168,7 +177,7 @@ valid_json_schema = {
         "name": {"type": "string"},
         "age": {"type": "number"},
     },
-    "required": ["name", "age"]
+    "required": ["name", "age"],
 }
 
 invalid_json_content = {"name": "John", "age": "thirty"}  # age should be a number
@@ -178,44 +187,52 @@ invalid_json_schema = {
         "name": {"type": "string"},
         "age": {"type": "string"},
     },
-    "required": ["name", "age"]
+    "required": ["name", "age"],
 }
 
 
-def mock_get_json_content_from_file(file):
+def mock_get_json_content_from_file(file: str) -> Dict:
     if file == "valid_json_file":
         return valid_json_content
-    elif file == "valid_schema_file":
+    if file == "valid_schema_file":
         return valid_json_schema
-    elif file == "invalid_json_file":
+    if file == "invalid_json_file":
         return invalid_json_content
-    elif file == "invalid_schema_file":
+    if file == "invalid_schema_file":
         return invalid_json_schema
-    else:
-        return {}
+    return {}
 
 
-@patch('util_lib.file.get_json_content_from_file', side_effect=mock_get_json_content_from_file)
-def test_valid_json(mock_get_json):
-    result, message = validate_json_file_against_schema_file("valid_json_file", "valid_schema_file")
+@patch(
+    "util_lib.file.get_json_content_from_file",
+    side_effect=mock_get_json_content_from_file,
+)
+def test_valid_json(mock_get_json: Mock) -> None:
+    result, message = validate_json_file_against_schema_file(
+        "valid_json_file", "valid_schema_file"
+    )
     assert result is True
     assert message == "JSON document is valid."
 
 
-@patch('util_lib.file.get_json_content_from_file', side_effect=mock_get_json_content_from_file)
-def test_invalid_json(mock_get_json):
-    result, message = validate_json_file_against_schema_file("invalid_json_file", "valid_schema_file")
+@patch(
+    "util_lib.file.get_json_content_from_file",
+    side_effect=mock_get_json_content_from_file,
+)
+def test_invalid_json(mock_item: Mock) -> None:
+    result, _ = validate_json_file_against_schema_file(
+        "invalid_json_file", "valid_schema_file"
+    )
     assert result is False
 
 
-@patch('util_lib.file.get_json_content_from_file', side_effect=mock_get_json_content_from_file)
-def test_invalid_schema(mock_get_json):
-    result, message = validate_json_file_against_schema_file("valid_json_file", "invalid_schema_file")
+@patch(
+    "util_lib.file.get_json_content_from_file",
+    side_effect=mock_get_json_content_from_file,
+)
+def test_invalid_schema(mock_item: Mock) -> None:
+    result, _ = validate_json_file_against_schema_file(
+        "valid_json_file", "invalid_schema_file"
+    )
     assert result is False
 
-
-
-if __name__ == '__main__':
-    test_invalid_schema
-    # download_file_safely('http://valid_url', './file')
-    # unittest.main()

@@ -1,3 +1,7 @@
+"""
+Tests for the graph module.
+"""
+
 import logging
 import unittest
 
@@ -12,6 +16,3 @@ def test_get_named_plotly_colours() -> None:
     assert df.size == 147
     assert df.columns.size == 1
 
-
-if __name__ == "__main__":
-    unittest.main()

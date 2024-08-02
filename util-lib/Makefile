@@ -50,6 +50,9 @@ check: run_precommit_checks ## Run pre-commit and code quality checks against al
 	@echo "🚀 Linting code "
 	@poetry run ruff check src/
 	@poetry run ruff check tests/
+	@echo "🚀 Static checking code "
+	@poetry run pylint src/
+	@poetry run pylint tests/
 
 .PHONY: clean_build
 clean_build: clean ## Destroy distributable directory and create new Python package using Poetry.
@@ -64,7 +67,7 @@ clean: ## Destroy distributable directory.
 .PHONY: test
 test: ## Test the application code using pytest
 	@echo "Testing code: Running pytest with code coverage"
-	@poetry run pytest --cov --cov-config=pyproject.toml --cov-report=xml
+	@poetry run pytest -s -v --cov --cov-config=pyproject.toml --cov-report=html
 
 .PHONY: uninstall_pre_commit_hooks
 uninstall_pre_commit_hooks: ## Remove pre-commit hooks.

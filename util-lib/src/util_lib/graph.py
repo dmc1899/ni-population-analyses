@@ -1,4 +1,11 @@
+"""
+ Convenience functions for graphs and plots.
+"""
 import pandas as pd
+
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def get_named_plotly_colours() -> pd.DataFrame:
@@ -12,8 +19,23 @@ def get_named_plotly_colours() -> pd.DataFrame:
     Returns:
         plotly dataframe with cell colour to match named colour name
 
+    Using in a Notebook:
+        fig = go.Figure(data=[go.Table(
+            header=dict(
+                values=["Plotly Named CSS colours"],
+                line_color='black', fill_color='white',
+                align='center', font=dict(color='black', size=14)
+            ),
+            cells=dict(
+                values=[df.colour],
+                line_color=[df.colour], fill_color=[df.colour],
+                align='center', font=dict(color='black', size=11)
+            ))
+        ])
+
+        fig.show
     """
-    s='''
+    s = """
         aliceblue, antiquewhite, aqua, aquamarine, azure,
         beige, bisque, black, blanchedalmond, blue,
         blueviolet, brown, burlywood, cadetblue,
@@ -49,25 +71,9 @@ def get_named_plotly_colours() -> pd.DataFrame:
         steelblue, tan, teal, thistle, tomato, turquoise,
         violet, wheat, white, whitesmoke, yellow,
         yellowgreen
-        '''
-    li=s.split(',')
-    li=[l.replace('\n','') for l in li]
-    li=[l.replace(' ','') for l in li]
+        """
+    li = s.split(',')
+    li = [l.replace('\n', '') for l in li]
+    li = [l.replace(' ', '') for l in li]
 
     return pd.DataFrame.from_dict({'colour': li})
-
-    # TODO - This is how you would use the above code in a Notebook.
-    # fig = go.Figure(data=[go.Table(
-    #     header=dict(
-    #         values=["Plotly Named CSS colours"],
-    #         line_color='black', fill_color='white',
-    #         align='center', font=dict(color='black', size=14)
-    #     ),
-    #     cells=dict(
-    #         values=[df.colour],
-    #         line_color=[df.colour], fill_color=[df.colour],
-    #         align='center', font=dict(color='black', size=11)
-    #     ))
-    # ])
-    #
-    # fig.write_image(path, engine="kaleido")
