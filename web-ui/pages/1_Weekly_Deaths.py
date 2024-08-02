@@ -305,7 +305,7 @@ def main():
                 y=all_weekly_deaths_df[comparison_year].loc[
                     0 : (analysis_end_week_selected - 1)
                 ]
-                if comparison_year == "2023"
+                if comparison_year == "2024"
                 else all_weekly_deaths_df[comparison_year],
                 name=f"{comparison_year} Weekly Deaths",
                 line_color="red" if "Mean" in comparison_year else None,

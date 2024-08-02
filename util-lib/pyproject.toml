@@ -1,0 +1,65 @@
+[tool.poetry]
+name = "util-lib"
+version = "0.1.0"
+description = ""
+authors = ["Darragh McConville <dmc1899@gmail.com>"]
+readme = "README.md"
+packages = [{include = "util_lib", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.2"
+mypy = "^1.10.0"
+deptry = "^0.16.1"
+pre-commit = "^3.7.1"
+pytest-cov = "^5.0.0"
+ruff = "^0.4.4"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+minversion = "7.0"
+xfail_strict = true
+filterwarnings = ["error"]
+log_cli = true
+log_cli_level = "INFO"
+log_cli_format = "%(asctime)s [%(levelname)s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+addopts = [
+    "--import-mode=importlib",#See https://docs.pytest.org/en/7.2.x/explanation/goodpractices.html#choosing-a-test-layout-import-rules
+]
+
+[tool.pylint]
+max-line-length = 120
+
+[tool.pylint.messages_control]
+disable = ["C0116", "unsubscriptable-object"]
+
+
+[tool.mypy]
+files = ["src","tests"]
+disallow_untyped_defs = "True"
+disallow_any_unimported = "True"
+no_implicit_optional = "True"
+check_untyped_defs = "True"
+warn_return_any = "True"
+warn_unused_ignores = "True"
+show_error_codes = "True"
+
+[[tool.mypy.overrides]]
+module = "plotly.*"
+ignore_missing_imports = true
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pandas = "^2.2.2"
+plotly = "^5.22.0"
+kaleido = "0.2.1"
+requests = "^2.32.2"
+jsonschema = "^4.22.0"
+openpyxl = "^3.1.5"
+pylint = "^3.2.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
