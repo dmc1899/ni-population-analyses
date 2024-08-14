@@ -5,7 +5,6 @@ Weekly deaths page.
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-import streamlit as st
 from plotly.subplots import make_subplots
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
@@ -66,8 +65,7 @@ def load_data():
     Load the input data from the local filesystem.
     :return: Pandas dataframe
     """
-    #dataframe = pd.read_pickle("/Users/darraghmcconville/Library/CloudStorage/OneDrive-KainosSoftware/Personal/dev-zone/ni-population/new/ni-population-analyses/web-ui/resources/data/deaths/AllDeathsUpTo2024Week17.pkl")
-    dataframe = pd.read_pickle(f"{st.session_state['parent_resource_path']}resources/data/deaths/AllDeathsUpTo2024Week31.pkl")
+    dataframe = pd.read_pickle(f"{st.session_state['parent_resource_path']}resources/data/deaths/AllDeathsUpAndStatsTo2024Week31.pkl")
     return dataframe
 
 
@@ -160,6 +158,7 @@ def main():
     st.caption("👈 Use the sidebar to configure parameters for your analysis.")
 
     all_weekly_deaths_df = load_data()
+    # st.write(all_weekly_deaths_df)
     csv = convert_df_to_csv(all_weekly_deaths_df)
 
     with st.sidebar:
@@ -318,8 +317,12 @@ def main():
         height=600,
         margin={"l": 50, "r": 50, "b": 50, "t": 50, "pad": 4},
         title={
-            "text": f"Weekly Deaths 2020-2023 (up to Week {analysis_end_week_selected}) "
-            f"by Date of Registration versus {mean_value_selected}"
+            "text": f"Weekly Deaths 2020-2024 (up to Week {analysis_end_week_selected}) "
+                    f"by Date of Registration versus {mean_value_selected}",
+            "font": {
+                "color": "black",   # Change to your desired font color lightslategrey
+                "size": 18         # Change to your desired font size
+            }
         },
         xaxis={
             "title_text": "Registration Week",
@@ -340,19 +343,57 @@ def main():
 
     fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
 
+
     st.markdown("---")
     st.plotly_chart(fig_deaths_trends, use_container_width=True, theme=None)
+
+
+    fig_cum_sum_deaths = make_subplots(specs=[[{"secondary_y": False}]])
+
+    for year in ALL_YEAR_COLUMNS:
+        fig_cum_sum_deaths.add_trace(
+            go.Scatter(x=all_weekly_deaths_df['Registration_Week'],
+                       y=all_weekly_deaths_df[f"{year}_cumsum"].loc[
+                         0 : (analysis_end_week_selected - 1)
+                         ],
+                       name=f"{year} Weekly Deaths",
+                       mode='lines+markers',
+                       fill='tozeroy',
+                       visible="legendonly" if year in ["2015", "2016", "2017", "2018", "2019"] else None,
+                       line_color = "red" if year == "2020" else None,
+                       line_dash = "dot" if year == "2024" else None),
+            secondary_y=False,
+        )
+
+    layout = go.Layout(
+        height=600,
+        margin=dict(l=50, r=50, b=100, t=100, pad=4),
+        title=dict(text=f"Cumulative Weekly Deaths 2015-2024 (up to Week {analysis_end_week_selected}) by Date of Registration"),
+        xaxis=dict(title_text="Registration Week of Year", type='category', tickmode = 'linear', tick0 = 1, dtick = 1, tickangle=0),
+        yaxis=dict(title_text="Cumulative Deaths"),
+        legend={
+            "orientation": "h",
+            "yanchor": "bottom",
+            "y": -0.4,
+            "xanchor": "left",
+            "x": 0.01,
+        },
+    )
+
+    st.markdown("---")
+    fig_cum_sum_deaths_fig = go.Figure(data=fig_cum_sum_deaths.data, layout=layout)
+    st.plotly_chart(fig_cum_sum_deaths_fig, use_container_width=True, theme=None)
 
     all_weekly_deaths_df_copy = all_weekly_deaths_df.copy()
     all_weekly_deaths_df_copy["week_name"] = all_weekly_deaths_df_copy.index
 
-    fig, axs = plt.subplots(1, 1, constrained_layout=True, figsize=(10, 4))
+    fig, axs = plt.subplots(1, 1, constrained_layout=True, figsize=(14, 4))
 
     for comparison_year in ["2024"]:
         axs.set_title(
             f"Weekly Deaths 2024 (up to Week {analysis_end_week_selected}) by "
             f"Date of Registration versus {mean_value_selected}",
-            fontsize=10,
+            fontsize=8,
             verticalalignment="top",
             color="black",
             pad=18.0,
@@ -420,20 +461,88 @@ def main():
             interpolate=True,
         )
 
-        axs.set_xlabel("Registration Week", fontsize=9)
-        axs.set_ylabel("Deaths", fontsize=9)
+        axs.set_xlabel("Registration Week", fontsize=7)
+        axs.set_ylabel("Deaths", fontsize=7)
 
         axs.xaxis.set_major_locator(MultipleLocator(1))
 
-        axs.tick_params(which="major", width=1.0, length=10, labelsize=8)
+        axs.tick_params(which="major", width=1.0, length=5, labelsize=6)
         axs.tick_params(
             which="minor", width=1.0, length=5, labelsize=8, labelcolor="0.25"
         )
 
-        axs.legend(loc="upper right", fontsize=9)
+        axs.legend(loc="upper right", fontsize=7)
 
     st.markdown("---")
-    st.pyplot(fig)
+    st.pyplot(fig, clear_figure=False, use_container_width=True)
+
+
+    colors = [
+        'whitesmoke',  # Blue #636EFA
+        'peachpuff',  # Red
+        'papayawhip',  # Green
+        'palegoldenrod',  # Purple
+        'oldlace',  # Orange
+        'gainsboro',  # Cyan
+        'lavender',  # Pink
+        'linen',  # Light Green
+        'lightsteelblue',  # Magenta
+        'darkorange'   # Yellow
+    ]
+
+    # Get the final cumulative sums for each year
+    final_cumulative_sums = {
+        year: all_weekly_deaths_df[f'{year}_cumsum'].iloc[analysis_end_week_selected - 1] for year in ALL_YEAR_COLUMNS
+    }
+
+    # Create a list of years
+    years_list = list(final_cumulative_sums.keys())
+    cumulative_values = list(final_cumulative_sums.values())
+
+    print(years_list)
+    print(cumulative_values)
+
+    fig_total_deaths_to_date = make_subplots(specs=[[{"secondary_y": False}]])
+
+    fig_total_deaths_to_date.add_trace(
+        go.Bar(
+            x=years_list,
+            y=cumulative_values,
+            name='Total Cumulative Sum',
+            marker=dict(color=colors),
+            text=cumulative_values,
+            textposition='auto'
+        )
+    )
+
+    new_layout = go.Layout(
+        height=600,
+        margin=dict(l=50, r=50, b=100, t=100, pad=4),
+        title=dict(
+            text=f'Total Deaths 2015-2024 (up to Registration Week {analysis_end_week_selected})',
+            x=0.5,  # Centers the title
+            xanchor='center',
+            font=dict(
+                size=16,  # Adjust the font size as needed
+                color='black',  # Set the font color
+                family='Arial',  # Set the font family
+                weight='normal'  # Make the text non-bold
+            )
+        ),
+        xaxis=dict(title_text="Year", type='category', tickmode = 'linear', tick0 = 1, dtick = 1, tickangle=0, tickfont=dict(size=14, color='black')),
+        yaxis=dict(title_text="Total Deaths",tickfont=dict(size=14, color='black')),
+        legend={
+            "orientation": "h",
+            "yanchor": "bottom",
+            "y": -0.4,
+            "xanchor": "left",
+            "x": 0.01,
+        },
+    )
+
+    st.markdown("---")
+    fig_total_deaths_to_date = go.Figure(data=fig_total_deaths_to_date.data, layout=new_layout)
+    st.plotly_chart(fig_total_deaths_to_date, use_container_width=True)
 
     st.markdown("---")
     st.markdown(
