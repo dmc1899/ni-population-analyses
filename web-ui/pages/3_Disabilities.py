@@ -101,17 +101,38 @@ def main():
         secondary_y=False,
     )
 
-    fig.update_layout(
-        title_text="New Personal Independence Claims by Month (2016-2022)", height=650
-    )
+    # fig.update_layout(
+    #     title_text="New Personal Independence Claims by Month (2016-2022)", height=650
+    # )
 
-    fig.update_xaxes(
-        {'title_text': 'Month', 'type': 'category', 'tickmode': 'linear', 'tick0': 1, 'dtick': 2}
-
-    )
+    # fig.update_xaxes(
+    #     {'title_text': 'Month', 'type': 'category', 'tickmode': 'linear', 'tick0': 1, 'dtick': 2}
+    #
+    # )
 
     fig.update_yaxes(title_text="Claims", secondary_y=False)
 
+    layout = go.Layout(
+        height=650,
+        margin=dict(l=50, r=50, b=100, t=100, pad=4),
+        title=dict(text="New Personal Independence Claims by Month (2016-2022)"),
+        xaxis=dict(title_text="Month", type='category', tickmode = 'linear', tick0 = 1, dtick = 2,tickangle=50),
+        yaxis=dict(title_text="Claims"),
+        legend={
+            "orientation": "h",
+            "yanchor": "bottom",
+            "y": -0.4,
+            "xanchor": "left",
+            "x": 0.01,
+        },
+        plot_bgcolor='rgba(0,0,0,0)',  # Makes the plot area background transparent
+        # paper_bgcolor='rgba(0,0,0,0)', # Makes the entire figure background transparent
+        font={
+            "color": "black"            # Sets the text color of all the components
+        }
+    )
+    fig = go.Figure(data=fig.data, layout=layout)
+    # st.plotly_chart(fig_cum_sum_deaths_fig, use_container_width=True, theme=None)
     st.plotly_chart(fig, use_container_width=True, theme=None)
 
     if show_raw_data_selected:

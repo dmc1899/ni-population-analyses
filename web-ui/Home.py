@@ -33,22 +33,19 @@ def main():
         """# NI Pandemic Period Insights
     """
     )
-    st.caption("👈 Select an area of interest from the sidebar to start exploring.")
+    # st.caption("👈 Select an area of interest from the sidebar to start exploring.")
 
     st.markdown(
         """
-        This [data application](https://acho.io/blogs/what-is-a-data-application) 
-        supports exploratory analyses of population and demographic datasets pertaining 
-        to the  COVID-19 pandemic response period in Northern Ireland (NI).
+        An analysis of births, deaths, disabilities and other population attributes in the context of the 
+        COVID-19 pandemic response period in Northern Ireland (NI).
         
-        Analyses include births, deaths, disabilities, countermeasures and their interrelationships.
+        👈 Select an area of interest from the sidebar to start exploring.
+
     """
     )
 
-    st.image(f"{st.session_state['parent_resource_path']}resources/img/bonhoeffer.jpg", use_column_width=True)
-    st.caption(
-        "[Image credit](https://www.insightforliving.ca/read/articles/dietrich-bonhoeffer)"
-    )
+    st.image(f"{st.session_state['parent_resource_path']}resources/img/pandemic.jpg", use_column_width=True)
 
 
 if __name__ == "__main__":

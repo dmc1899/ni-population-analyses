@@ -339,6 +339,11 @@ def main():
             "xanchor": "left",
             "x": 0.01,
         },
+        plot_bgcolor='rgba(0,0,0,0)',  # Makes the plot area background transparent
+        # paper_bgcolor='rgba(0,0,0,0)', # Makes the entire figure background transparent
+        font={
+            "color": "black"            # Sets the text color of all the components
+        }
     )
 
     fig_deaths_trends = go.Figure(data=fig_deaths_trends.data, layout=layout)
@@ -378,6 +383,11 @@ def main():
             "xanchor": "left",
             "x": 0.01,
         },
+        plot_bgcolor='rgba(0,0,0,0)',  # Makes the plot area background transparent
+        # paper_bgcolor='rgba(0,0,0,0)', # Makes the entire figure background transparent
+        font={
+            "color": "black"            # Sets the text color of all the components
+        }
     )
 
     st.markdown("---")
@@ -387,16 +397,16 @@ def main():
     all_weekly_deaths_df_copy = all_weekly_deaths_df.copy()
     all_weekly_deaths_df_copy["week_name"] = all_weekly_deaths_df_copy.index
 
-    fig, axs = plt.subplots(1, 1, constrained_layout=True, figsize=(14, 4))
+    fig, axs = plt.subplots(1, 1, constrained_layout=True, figsize=(10, 4))
 
     for comparison_year in ["2024"]:
         axs.set_title(
             f"Weekly Deaths 2024 (up to Week {analysis_end_week_selected}) by "
             f"Date of Registration versus {mean_value_selected}",
-            fontsize=8,
+            fontsize=10,
             verticalalignment="top",
             color="black",
-            pad=18.0,
+            pad=35.0,
         )
 
         x_plot_point = (
@@ -423,8 +433,8 @@ def main():
             else all_weekly_deaths_df_copy[f"{comparison_year}"]
         )
 
-        axs.set_xlim(1, 52)
-        axs.set_ylim(200, 550)
+        axs.set_xlim(1, analysis_end_week_selected)
+        axs.set_ylim(190, 570)
 
         axs.grid(linestyle="--", linewidth=0.25, color=".5", zorder=-10)
 
@@ -461,21 +471,20 @@ def main():
             interpolate=True,
         )
 
-        axs.set_xlabel("Registration Week", fontsize=7)
-        axs.set_ylabel("Deaths", fontsize=7)
+        axs.set_xlabel("Registration Week", fontsize=8)
+        axs.set_ylabel("Deaths", fontsize=8)
 
         axs.xaxis.set_major_locator(MultipleLocator(1))
 
-        axs.tick_params(which="major", width=1.0, length=5, labelsize=6)
+        axs.tick_params(which="major", width=1.0, length=5, labelsize=8)
         axs.tick_params(
-            which="minor", width=1.0, length=5, labelsize=8, labelcolor="0.25"
+            which="minor", width=1.0, length=5, labelsize=10, labelcolor="0.25"
         )
 
-        axs.legend(loc="upper right", fontsize=7)
+        axs.legend(loc="upper right", fontsize=8)
 
     st.markdown("---")
     st.pyplot(fig, clear_figure=False, use_container_width=True)
-
 
     colors = [
         'whitesmoke',  # Blue #636EFA
@@ -524,7 +533,7 @@ def main():
             xanchor='center',
             font=dict(
                 size=16,  # Adjust the font size as needed
-                color='black',  # Set the font color
+                # color='black',  # Set the font color
                 family='Arial',  # Set the font family
                 weight='normal'  # Make the text non-bold
             )
