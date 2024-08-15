@@ -6,6 +6,8 @@ import os
 import pandas as pd
 import streamlit as st
 import plotly.express as px
+from plotly.subplots import make_subplots
+import plotly.graph_objects as go
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.ticker import MaxNLocator
@@ -99,19 +101,19 @@ def main():
 
     # Add in title and subtitle
     axes.text(
-        x=0.12,
-        y=0.93,
-        s="Percentage change in Monthly Births v " "2015-2019 Mean",
+        x=0.22,
+        y=0.98,
+        s="Percentage change in Monthly Births 2020-2024 v " "2015-2019 Mean",
         transform=fig.transFigure,
         ha="left",
-        fontsize=6,
-        weight="bold",
-        alpha=0.8,
+        fontsize=10,
+        # weight="normal",
+        alpha=0.9,
     )
     axes.text(
         x=0.12,
-        y=0.90,
-        s="Percentage difference in monthly births "
+        y=0.92,
+        s="Displays the percentage difference in monthly births "
         "versus the 2015-2019 average figure for "
         "the same month.",
         transform=fig.transFigure,
@@ -202,22 +204,68 @@ def main():
             mime="text/csv",
             help="Download the raw data as a CSV file.",
         )
+    #
+    # fig = px.bar(
+    #     all_monthly_births_df,
+    #     x="Month_of_Birth",
+    #     y=range_2006_to_2023,
+    #     title="NI Total Monthly Births by Month of Birth 2006-2023",
+    #     barmode="group",
+    #     height=600,
+    # )
+    #
+    # fig.update_xaxes(title_text="Month of Birth")
+    # fig.update_yaxes(title_text="Number of Births", secondary_y=False)
+    #
+    # fig.update_layout(legend_title_text="Year")
+    #
+    # st.plotly_chart(fig, use_container_width=True, theme=None)
 
-    fig = px.bar(
-        all_monthly_births_df,
-        x="Month_of_Birth",
-        y=range_2006_to_2023,
-        title="NI Total Monthly Births by Month of Birth 2006-2023",
-        barmode="group",
+    # fig = go.Figure()
+    fig2 = make_subplots(specs=[[{"secondary_y": False}]])
+
+    # Adding a bar trace for each year in the specified range
+    for year in range_2006_to_2023:
+        fig2.add_trace(go.Bar(
+            x=all_monthly_births_df["Month_of_Birth"],
+            y=all_monthly_births_df[year],
+            name=str(year)
+        ))
+
+    # Update the layout of the figure
+
+    new_layout = go.Layout(
         height=600,
+        margin=dict(l=50, r=50, b=100, t=100, pad=4),
+        title=dict(
+            text="NI Total Monthly Births by Month of Birth 2006-2024",
+            x=0.5,  # Centers the title
+            xanchor='center',
+            font=dict(
+                size=16,  # Adjust the font size as needed
+                color='black',  # Set the font color
+                family='Arial',  # Set the font family
+                weight='normal'  # Make the text non-bold
+            )
+        ),
+        xaxis=dict(title_text="Month of Birth", type='category', tickmode = 'linear', tick0 = 1, dtick = 1, tickangle=0, tickfont=dict(size=14, color='black')),
+        yaxis=dict(title_text="Number of Births", tickfont=dict(size=14, color='black'), title_standoff=5),
+        plot_bgcolor='rgba(0,0,0,0)',  # Makes the plot area background transparent
+        paper_bgcolor='rgba(0,0,0,0)', # Makes the entire figure background transparent
+        font={
+            "color": "black"            # Sets the text color of all the components
+        },
+        legend={
+            "orientation": "h",
+            "yanchor": "bottom",
+            "y": -0.4,
+            "xanchor": "left",
+            "x": 0.01,
+        },
     )
 
-    fig.update_xaxes(title_text="Month of Birth")
-    fig.update_yaxes(title_text="Number of Births", secondary_y=False)
-
-    fig.update_layout(legend_title_text="Year")
-
-    st.plotly_chart(fig, use_container_width=True, theme=None)
+    fig2 = go.Figure(data=fig2.data, layout=new_layout)
+    st.plotly_chart(fig2, use_container_width=True, theme=None)
 
     if show_raw_data_selected:
         st.subheader("Raw data")
