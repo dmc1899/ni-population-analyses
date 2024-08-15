@@ -533,7 +533,7 @@ def main():
             xanchor='center',
             font=dict(
                 size=16,  # Adjust the font size as needed
-                color='black',  # Set the font color
+                # color='black',  # Set the font color
                 family='Arial',  # Set the font family
                 weight='normal'  # Make the text non-bold
             )
