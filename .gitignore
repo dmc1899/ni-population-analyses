@@ -136,3 +136,5 @@ dmypy.json
 
 #This app
 web-dev/
+
+.secret
