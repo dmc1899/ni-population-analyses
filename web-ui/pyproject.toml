@@ -4,6 +4,9 @@ version = "0.1.0"
 description = "Web application for viewing and interacting with Northern Ireland pandemic period population data."
 authors = ["Darragh McConville"]
 readme = "README.md"
+packages = []
+include = ["**/*"]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.10"
