@@ -559,7 +559,7 @@ def main():
     )
 
     all_weekly_deaths_styled_df = (
-        all_weekly_deaths_df.fillna(np.NZERO)
+        all_weekly_deaths_df.fillna(-0.0)
         .pipe(subset_columns, columns=ALL_YEAR_COLUMNS)
         .pipe(subset_rows, start=0, end=(analysis_end_week_selected))
         .pipe(rename_index_with_labels, labels=generate_sequence_labels("Week", 53))

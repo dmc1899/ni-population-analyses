@@ -45,7 +45,7 @@ def main():
     """
     )
 
-    st.image(f"{st.session_state['parent_resource_path']}resources/img/pandemic.jpg", use_column_width=True)
+    st.image(f"{st.session_state['parent_resource_path']}resources/img/pandemic.jpg", use_container_width=True)
 
 
 if __name__ == "__main__":
